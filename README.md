@@ -29,27 +29,22 @@ tracked appropriately.
 Developers should follow the following five-step process to create a new ingest
 pipeline.
 
-1. Fork this repository
-2. Set up your development environment
-3. Run `> cookiecutter templates/ingest -o ingest/`
-4. Modify the generated boilerplate pipeline code.
-5. Submit a pull request.
+1. Clone or fork this repository to your development area
+2. Set up your development environment according to the instructions below.
+3. Run `> pytest` to ensure that tests pass (validate your setup)
+4. Run `> cookiecutter templates/ingest -o ingest/` to generate your own ingest.
+5. Follow the steps outlined in the generated ingest README to modify the generated ingest code.
+6. Test your changes, then push back up to your remote repository.
 
-Repository maintainers will then review the pull request and work with you to make any
-additional changes, if needed, before accepting the pull request and deploying the
-ingest to our production environment.
+This repository supports adding as many ingests as you want. Just follow steps 3-6 for
+each new ingest you want to add.
 
 
 ## Development Environment Setup
 
 This section outlines how to set up the recommended development environment for this
-project. Of course, developers are free to use their own development environment, but
-they risk experiencing delays in their pull request being accepted due to code that
-does not pass tests, meet code style, or has other errors. Unifying the development
-environments used by developers on this project also allows us to provide better
-support to developers if they run into other problems.
+project.
 
-The steps to set up the recommended development environment are listed below:
 
 1. Download and install [VS Code](https://code.visualstudio.com). Make sure to add 
 `code` to your path if prompted.
@@ -62,7 +57,7 @@ The steps to set up the recommended development environment are listed below:
 3. The first time you open this project in VS Code you will be prompted to install the
 recommended extensions. Please do so now.
 
-4. **Windows users**: We strongly recommend using 
+4. **Windows users**: We recommend using
 [Docker](https://www.docker.com/products/docker-desktop) to manage dependencies for
 this project. If you choose to use Docker follow the steps below:
     - Press `F1` (or `ctrl-shift-p`) to bring up the command pane in VS Code
