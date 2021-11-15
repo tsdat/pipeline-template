@@ -1,5 +1,19 @@
 {
+    "autoDocstring.customTemplatePath": ".vscode/docstring.mustache",
+    "editor.formatOnSave": true,
     "python.envFile": "${workspaceFolder}/.vscode/.env",
+    "python.formatting.provider": "black",
+    "python.linting.flake8Args": [
+        "--exclude",
+        "templates/**"
+    ],
+    "python.linting.flake8Enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "ingest",
+        "tests",
+    ],
     "terminal.integrated.env.osx": {
         "PYTHONPATH": "${PYTHONPATH}:${workspaceFolder}"
     },
@@ -9,13 +23,7 @@
     "terminal.integrated.env.windows": {
         "PYTHONPATH": "${PYTHONPATH}:${workspaceFolder}"
     },
-    "python.testing.pytestEnabled": true,
-    "python.testing.pytestArgs": [
-        "tests",
-        "ingest"
-    ],
-    "editor.formatOnSave": true,
-    "python.linting.lintOnSave": true,
-    "python.formatting.provider": "black",
-    "autoDocstring.customTemplatePath": ".vscode/docstring.mustache",
+    "todo-tree.filtering.excludeGlobs": [
+        "**/templates/**", // Prevent template TODOs from polluting developer workspace
+    ]
 }

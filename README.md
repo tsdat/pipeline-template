@@ -14,8 +14,10 @@ all the ingests you will group under this repository. (E.g., `ingest-awaken` was
 name given to the Atmosphere to Electrons' repository for ingest scripts developed for
 the [A2e AWAKEN](https://github.com/a2edap/ingest-awaken)) project
 3. Replace all occurances of "`{template}`" with the name you chose in step 2.
+4. Find and address all instances of `# TODO – Maintainer:` in the codebase. Remove
+these TODOs when done.
 4. Update this `README.md` file and other documentation / scripts to suit your project
-needs.
+needs, including removing this section.
 
 
 ## How it works
