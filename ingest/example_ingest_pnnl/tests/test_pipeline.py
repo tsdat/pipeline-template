@@ -14,6 +14,6 @@ def test_example_ingest_pnnl_pipeline():
     )
     output = pipeline.run(expand("tests/data/input/data.csv", parent))
     expected = xr.open_dataset(
-        expand("tests/data/expected/pnnl.example_ingest.b1.20211114.225200.nc", parent)
+        expand("tests/data/expected/pnnl.example_ingest.b1.20211114.000000.nc", parent)
     )
     xr.testing.assert_allclose(output, expected)
