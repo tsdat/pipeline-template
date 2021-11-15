@@ -5,4 +5,4 @@ COPY requirements-dev.txt .
 
 RUN pip install -r requirements-dev.txt
 
-WORKDIR /home/root/ingest-{template}
+WORKDIR /home/root/ingest

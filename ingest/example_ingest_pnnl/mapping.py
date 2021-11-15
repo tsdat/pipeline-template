@@ -15,7 +15,7 @@ mapping: Dict["AnyStr@compile", IngestSpec] = {
         storage_config=expand(
             "config/storage_config_example_ingest_pnnl.yml", __file__
         ),
-        name="{template}_example_ingest_pnnl",
+        name="example_ingest_pnnl",
     ),
     # Mapping for Processed Data -> Ingest (so we can reprocess plots)
     re.compile(r".*/pnnl\.example_ingest\.b1\.\d{8}\.\d{6}\.nc"): IngestSpec(
@@ -26,6 +26,6 @@ mapping: Dict["AnyStr@compile", IngestSpec] = {
         storage_config=expand(
             "config/storage_config_example_ingest_pnnl.yml", __file__
         ),
-        name="plot_{template}_example_ingest_pnnl",
+        name="plot_example_ingest_pnnl",
     ),
 }

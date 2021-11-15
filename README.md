@@ -1,23 +1,10 @@
-# INGEST-{template}
+# INGEST-TEMPLATE
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![tests](https://github.com/tsdat/ingest-template/actions/workflows/tests.yml/badge.svg)](https://github.com/tsdat/ingest-template/actions/workflows/tests.yml)
 
 This repository helps provide a way to group similar `tsdat` ingest scripts in the same
 repository so that they can be more easily maintained and deployed on input files. 
-
-To use this template repository, perform the following steps:
-1. On [the repo page](https://github.com/tsdat/ingest-template) click `Use this template`.
-2. Fill out the prompts to your liking. We recommend naming your repository something
-like `ingest-{template}`, where `{template}` is a 1- or 2- word title that represents
-all the ingests you will group under this repository. (E.g., `ingest-awaken` was the
-name given to the Atmosphere to Electrons' repository for ingest scripts developed for
-the [A2e AWAKEN](https://github.com/a2edap/ingest-awaken)) project
-3. Replace all occurances of "`{template}`" with the name you chose in step 2.
-4. Find and address all instances of `# TODO – Maintainer:` in the codebase. Remove
-these TODOs when done.
-4. Update this `README.md` file and other documentation / scripts to suit your project
-needs, including removing this section.
 
 
 ## How it works
@@ -70,16 +57,10 @@ The steps to set up the recommended development environment are listed below:
     We chose VS Code because of its clean user interface, quick startup time, extremely
     powerful capabilities out-of-box, and its rich library of open source extensions.
 
-2. Clone your fork of this repository to your laptop and open it up in VS Code:
-    ```bash
-    git clone https://github.com/<your-username>/ingest-{template}.git
-    code ingest-{template}
-    ```
-    *Note that the "`code ingest-{template}`" step will only work if `code` has been added
-    to your path. Open the folder in VS Code manually if this is the case.*
+2. Clone your fork of this repository to your laptop and open it up in VS Code
 
-3. The first time you open the `ingest-{template}` project in VS Code you will be prompted
-to install the recommended extensions. Please do so now.
+3. The first time you open this project in VS Code you will be prompted to install the
+recommended extensions. Please do so now.
 
 4. **Windows users**: We strongly recommend using 
 [Docker](https://www.docker.com/products/docker-desktop) to manage dependencies for
@@ -88,7 +69,7 @@ this project. If you choose to use Docker follow the steps below:
     - In the command pane, type: `Remote-Containers: Open Folder in Container...` and
     hit `return`
     - You will be prompted to specify which folder should be opened. Select the folder
-    containing this file (`ingest-{template}`).
+    containing this `README` file
     - Several dialog boxes may appear while the VS Code window is refreshing. Please
     install the recommended extensions via the dialog box. An additional dialog box
     should appear asking you to reload the window so Pylance can take effect. Please do
@@ -105,15 +86,15 @@ above if you haven't already done so. Then run the following commands to create 
 environment:
     
     ```bash
-    $ conda create --name ingest-{template} python=3.8
-    $ conda activate ingest-{template}
-    (ingest-{template}) $ pip install -r requirements-dev.txt
+    $ conda create --name ingest python=3.8
+    $ conda activate ingest
+    (ingest) $ pip install -r requirements-dev.txt
     ```
 
 6. Tell VS Code to use your new `conda` environment:
     - Press `F1` (or `ctrl-shift-p`) to bring up the command pane in VS Code
     - In the command pane, type: `Python: Select Interpreter` and hit `return`
-    - Select the newly-created `ingest-{template}` conda environment from the list. Note
+    - Select the newly-created `ingest` conda environment from the list. Note
     that you may need to refresh the list (cycle icon in the top right) for it to show
     up.
     - Reload the VS Code window to ensure that this setting propagates correctly.

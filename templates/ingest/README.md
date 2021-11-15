@@ -10,8 +10,7 @@ installed if you set up your development environment according to
 pip install cookiecutter
 ```
 
-Then run the following command from the top-level directory of the `ingest-{template}`
-repository:
+Then run the following command from the top-level directory of the repository:
 ```
 cookiecutter templates/ingest -o ingest/
 ```

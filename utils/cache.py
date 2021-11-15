@@ -25,9 +25,8 @@ class PipelineCache:
 
 
         Args:
-            parent_module (str, optional): The module (relative to the
-            "ingest-{template}" folder) under which individual ingests live. Defaults
-            to "ingest".
+            parent_module (str, optional): The module (relative to the repository root
+            folder) under which individual ingests live. Defaults to "ingest".
 
         ----------------------------------------------------------------------------"""
         for ingest_module_info in pkgutil.iter_modules([parent_module]):

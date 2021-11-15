@@ -21,7 +21,7 @@ mapping: Dict["AnyStr@compile", IngestSpec] = {
         storage_config=expand(
             "config/storage_config_{{ cookiecutter.ingest_slug }}.yml", __file__
         ),
-        name="{template}_{{ cookiecutter.ingest_slug }}",
+        name="{{ cookiecutter.ingest_slug }}",
     ),
     # Mapping for Processed Data -> Ingest (so we can reprocess plots)
     re.compile(r"YOUR-REGEX-HERE"): IngestSpec(
@@ -32,7 +32,7 @@ mapping: Dict["AnyStr@compile", IngestSpec] = {
         storage_config=expand(
             "config/storage_config_{{ cookiecutter.ingest_slug }}.yml", __file__
         ),
-        name="plot_{template}_{{ cookiecutter.ingest_slug }}",
+        name="plot_{{ cookiecutter.ingest_slug }}",
     ),
     # You can add as many {regex: IngestSpec} entries as you would like. This is useful
     # if you would like to reuse this ingest at other locations or possibly for other

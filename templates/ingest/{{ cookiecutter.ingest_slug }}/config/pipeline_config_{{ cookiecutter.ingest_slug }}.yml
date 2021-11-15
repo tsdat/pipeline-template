@@ -20,7 +20,7 @@ dataset_definition:
     description: "{{ cookiecutter.description }}"
     conventions: MHKiT-Cloud Data Standards v. 1.0
     institution: Pacific Northwest National Laboratory
-    code_url: https://github.com/tsdat/ingest-{template}  # TODO – Maintainer: Update this URL
+    code_url: https://github.com/tsdat/ingest-template
     location_meaning: "{{ cookiecutter.location }}"
 
   dimensions:

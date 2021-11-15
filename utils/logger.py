@@ -4,7 +4,7 @@ import json
 import logging
 import sys
 
-logger = logging.getLogger("{template}")
+logger = logging.getLogger("ingest")
 
 
 def log_exception(error_message=""):
