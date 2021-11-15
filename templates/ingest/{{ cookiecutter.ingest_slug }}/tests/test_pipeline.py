@@ -7,10 +7,10 @@ parent = os.path.dirname(__file__)
 
 
 # TODO – Developer: Update paths to your input files here. Please add tests if needed.
-def test_pipeline_at_{{ cookiecutter.location_slug }}():
+def test_{{ cookiecutter.ingest_slug }}_pipeline():
     set_dev_env()
     pipeline = Pipeline(
-        expand("config/pipeline_config_{{ cookiecutter.location_slug }}.yml", parent),
+        expand("config/pipeline_config_{{ cookiecutter.ingest_slug }}.yml", parent),
         expand("config/storage_config_{{ cookiecutter.ingest_slug }}.yml", parent),
     )
     output = pipeline.run(expand("tests/data/input/data.csv", parent))

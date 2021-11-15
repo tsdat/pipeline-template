@@ -1,0 +1,9 @@
+# This file contains example data used for a very basic ingest pipeline. It is kept
+# intentionally small, as it will be committed and used in regular tests.
+Timestamp (end of interval),Example
+"2021-11-14 22:52:00",0.5
+"2021-11-14 22:55:00",0.6
+"2021-11-14 22:57:00",0.7
+"2021-11-14 22:59:00",0.8
+"2021-11-14 23:01:00",0.5
+"2021-11-14 23:03:00",1.0
