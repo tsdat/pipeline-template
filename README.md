@@ -9,8 +9,8 @@ repository so that they can be more easily maintained and deployed on input file
 
 ## How it works
 
-- **`runner.py`**: Provides a CLI which to dispatch the appropriate ingest for one or
-more provided input files.
+- **`runner.py`**: Top-level CLI to run the appropriate ingest on one or more files.
+Run `python runner.py --help` to see the full list of commands it offers.
 - **`ingest/*`**: collection of python modules, each of which is a self-describing and
 self-contained ingest. Every ingest module exports the necessary information for the
 `runner` or higher-level processes to instantiate and run the ingest.
@@ -19,7 +19,7 @@ their own tests, so this folder is primarily used for high-level sanity checks.
 - **`utils/*`**: utility methods and classes used throughout the project. This folder
 will be updated as needed to allow ingests to leverage common project-specific tools.
 - **`.devcontainer/*`, `.vscode/*`, `*docker*`**: Configurations to simplify and
-standardize development environment setup.
+development environment setup.
 - **`.github/*`**: Workflows and templates to ensure code is well-tested and issues are
 tracked appropriately.
 
@@ -40,7 +40,7 @@ This repository supports adding as many ingests as you want. Just follow steps 3
 each new ingest you want to add.
 
 
-## Development Environment Setup
+## Development environment setup
 
 This section outlines how to set up the recommended development environment for this
 project.
@@ -95,3 +95,19 @@ environment:
     - Reload the VS Code window to ensure that this setting propagates correctly.
     This is probably not needed, but doesn't hurt. To do this, press `F1` to open
     the control pane again and type `Developer: Reload Window`.
+
+## Additional resources
+
+- Learn more about `tsdat`:
+    - GitHub: https://github.com/tsdat/tsdat
+    - Documentation: https://tsdat.readthedocs.io
+    - Data standards: https://github.com/tsdat/data_standards
+- Learn more about `xarray`: 
+    - GitHub: https://github.com/pydata/xarray
+    - Documentation: https://xarray.pydata.org
+- Other useful tools:
+    - VS Code: https://code.visualstudio.com/docs
+    - Docker: https://docs.docker.com/get-started/
+    - `pytest`: https://github.com/pytest-dev/pytest
+    - `black`: https://github.com/psf/black
+    - `matplotlib` guide: https://realpython.com/python-matplotlib-guide/
