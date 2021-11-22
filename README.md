@@ -23,17 +23,50 @@ development environment setup.
 - **`.github/*`**: Workflows and templates to ensure code is well-tested and issues are
 tracked appropriately.
 
+After you have added at least one ingest pipeline in the `ingest/` folder, you can run
+the `runner.py` script as a CLI to ingest data matching one of your registered ingests.
+You can run `python runner.py --help` to see a full list of runtime options, shown
+below:
+
+```
+$ python runner.py --help
+Usage: runner.py [OPTIONS] FILES...
+
+  --------------------------------------------------------------------------
+  Main entry point to run a registered ingestion pipeline on provided data
+  file(s). This script takes path(s) to input file(s), automatically
+  determines which ingest to use to process the data, and runs that ingest
+  on the provided data.
+
+  Args:
+
+      files (List[Path], optional): The path(s) to the input file(s) to
+      process.
+
+  --------------------------------------------------------------------------
+
+Arguments:
+  FILES...  Path(s) to the file(s) to process  [required]
+
+Options:
+  --install-completion  Install completion for the current shell.
+  --show-completion     Show completion for the current shell, to copy it or
+                        customize the installation.
+
+  --help                Show this message and exit.
+```
+
 
 ## Adding a new pipeline
 
-Developers should follow the following five-step process to create a new ingest
-pipeline.
+Developers should follow the following steps to create a new ingest pipeline:
 
 1. Clone or fork this repository to your development area
 2. Set up your development environment according to the instructions below.
 3. Run `> pytest` to ensure that tests pass (validate your setup)
 4. Run `> cookiecutter templates/ingest -o ingest/` to generate your own ingest.
-5. Follow the steps outlined in the generated ingest README to modify the generated ingest code.
+5. Follow the steps outlined in the generated ingest README to modify the generated
+ingest code.
 6. Test your changes, then push back up to your remote repository.
 
 This repository supports adding as many ingests as you want. Just follow steps 3-6 for

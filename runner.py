@@ -3,15 +3,7 @@ import typer
 from typing import List
 from pathlib import Path
 from enum import Enum
-from utils import (
-    logger,
-    PipelineDispatcher,
-    set_dev_env,
-    set_prod_env,
-)
-
-
-# TODO: Examine logging more closely –  can this be improved?
+from utils import logger, PipelineDispatcher, set_env
 
 
 app = typer.Typer()
@@ -33,24 +25,20 @@ def run_pipeline(
         resolve_path=True,
         help="Path(s) to the file(s) to process",
     ),
-    mode: Mode = typer.Option(Mode.local, help="The processing mode to use."),
 ):
-    """
-    Main entry point to the ingest controller. This script takes a path to an input
-    file, automatically determines which ingest(s) to use, and runs those ingests
-    on the provided input data.
+    """--------------------------------------------------------------------------
+    Main entry point to run a registered ingestion pipeline on provided data
+    file(s). This script takes path(s) to input file(s), automatically determines
+    which ingest to use to process the data, and runs that ingest on the provided
+    data.
 
     Args:
-        input_file (str): The path to the input file to process.
-        mode (str, optional): The processing mode used.
 
-    """
+        files (List[Path], optional): The path(s) to the input file(s) to process.
 
-    logger.debug(f"Using [{mode.value}] mode to run the follow file:\n{files}")
-    if mode.value == Mode.local:
-        set_dev_env()
-    elif mode == Mode.aws:
-        set_prod_env()
+    --------------------------------------------------------------------------"""
+
+    set_env()
 
     logger.info(f"Found input files: {files}")
 
