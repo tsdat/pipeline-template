@@ -134,4 +134,7 @@ quality_management:
     checker:
       classname: ingest.{{ cookiecutter.ingest_slug }}.pipeline.qc.CustomQualityChecker
     handlers:
-      - classname: ingest.{{ cookiecutter.ingest_slug }}.pipeline.qc.CustomQualityHandler{% endif %}
+      - classname: ingest.{{ cookiecutter.ingest_slug }}.pipeline.qc.CustomQualityHandler
+    variables:
+     - DATA_VARS
+    exclude: [latitude, longitude, altitude]{% endif %}
