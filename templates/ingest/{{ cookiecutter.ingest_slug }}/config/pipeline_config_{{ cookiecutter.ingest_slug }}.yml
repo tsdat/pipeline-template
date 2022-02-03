@@ -4,18 +4,34 @@
 # the some projects may use slightly different metadata conventions and requirements
 # than tsdat.
 
-pipeline:
-  type: Ingest
+pipeline: {% if cookiecutter.add_help == "yes" %}
+  # The 'pipeline' section defines some high-level parameters that are mostly just used
+  # to name the files that this pipeline produces. Our file naming conventions dictate
+  # that output (processed) files are named like:
+  # <location_id>.<dataset_name>[-qualifier][-temporal].<data_level>.<YYYYMMDD>.<HHMMSS>.<extension>{% endif %}
 
-  # These parameters will be used to name files.
+  type: Ingest
   location_id: "{{ cookiecutter.location_slug }}"
   dataset_name: "{{ cookiecutter.ingest | slugify(separator='_') }}"
   # qualifier: ""
   # temporal: ""
-  data_level: "b1"  # If not applying QC this should be set to "a1"
+  data_level: "b1"  # If not applying any QC this should be set to "a1"
 
-dataset_definition:
-  attributes:
+# --------------------------------------------------------------------------------------
+
+dataset_definition: {% if cookiecutter.add_help == "yes" %}
+  # The 'dataset_definition' section describes the metadata and variable structure that
+  # the output dataset will take. This section is based on the netCDF standard such that
+  # for each output dataset there are global attributes, dimensions, coordinate
+  # variables, and data variables. The actual structure the output dataset takes is
+  # determined by the output FileHandler selected in the storage configuration file (by
+  # default it is netCDF, so the structure and metadata here is preserved).{% endif %}
+
+  attributes: {% if cookiecutter.add_help == "yes" %}
+    # The 'attributes' section defines the global attributes that will appear in the
+    # output dataset. It is recommended to include at least the attributes listed below
+    # in your configuration files, and we always encourage adding more information that
+    # helps your users understand the context in which the data were obtained.{% endif %}
     title: "{{ cookiecutter.ingest }}"
     description: "{{ cookiecutter.description }}"
     conventions: MHKiT-Cloud Data Standards v. 1.0
@@ -23,47 +39,72 @@ dataset_definition:
     code_url: https://github.com/tsdat/ingest-template
     location_meaning: "{{ cookiecutter.location }}"
 
-  dimensions:
+  dimensions: {% if cookiecutter.add_help == "yes" %}
+    # The 'dimensions' section defines the shape of your dataset. It is expected that
+    # 'time' is always a dimension, but you may have as many additional dimensions as
+    # you would like.{% endif %}
     time:
         length: unlimited
 
-  variables:
-
-    time:
-      input:
+  variables: {% if cookiecutter.add_help == "yes" %}
+    # The 'variables' section defines the metadata and retrieval rules for measurements
+    # that are reported in your output dataset. Each variable configuration block
+    # consists of 3-5 main components:
+    #
+    # 1) input [optional] - tells tsdat how the variable should be retrieved. You can
+    # leave this out if you want to populate the variable's data manually.
+    # 2) data [optional] - used to set the variable's data directly in this config file,
+    # which is useful for scalar properties (like altitude or lat/lon).
+    # 3) dims – tells tsdat what shape this data has.
+    # 4) type – this is the np.dtype of the variable.
+    # 5) attrs – metadata that describes this variable.
+    #
+    # You can leave off both items 1 and 2 to have tsdat initialize the variable as an
+    # empty array. This is useful if you want to add data to your output file that isn't
+    # directly retrieved from the input dataset.
+    {% endif %}
+    time: {% if cookiecutter.add_help == "yes" %}
+      # The time coordinate variable is required in every dataset processed by tsdat{% endif %}
+      input: {% if cookiecutter.add_help == "yes" %}
+        # The input section describes how the data should be retrieved from the input
+        # file. Here we say that 'time' is named 'Timestamp (end of interval)' in the
+        # input file. We also specify how the data should be converted from the input
+        # to output; in this case we specify how to convert the time strings from the
+        # input into a python datetime object.{% endif %}
         name: Timestamp (end of interval)
         converter:
           classname: tsdat.utils.converters.StringTimeConverter
           parameters:
             timezone: UTC
-            time_format: "%Y-%m-%d %H:%M:%S"
-      dims: [time]
-      type: long
-      attrs:
+            time_format: "%Y-%m-%d %H:%M:%S" {% if cookiecutter.add_help == "yes" %}
+      {%endif%}
+      dims: [time] {% if cookiecutter.add_help == "yes" %}# 'time' is a coordinate variable, so it is dimensioned by 'time' {% if cookiecutter.add_help == "yes" %}
+      {%endif%}
+      # 'time' should be a 'long' data type, since in this case it is the number of
+      # seconds since 1970, which is very common and standard way to represent time.{% endif%}
+      type: long {% if cookiecutter.add_help == "yes" %}
+      {%endif%}
+      attrs: {% if cookiecutter.add_help == "yes" %}
+        # Here we define some helpful attributes for users and machines. Typically you
+        # should always define a long_name (used for plot labels), a standard_name (used
+        # to standardize variable across datasets according to CF Conventions), and
+        # units (https://github.com/hgrecco/pint/blob/master/pint/default_en.txt){% endif %}
         long_name: Time (UTC)
         standard_name: time
         units: seconds since 1970-01-01T00:00:00
-    
-    example_var:          # Name of variable in the output file
+
+    example_var:
       input:
-        name: "Example"   # Name of variable in the input file
-        # units: m        # Units the input variable was measured in. Provide this if 
-                          # the output units are different and you want tsdat to do the
-                          # conversion.
-      dims: [time]        # List of coordinates that dimension this variable. `time` is
-                          # a very common dimension, sometimes `height`, too.
-      type: float         # The data type, typically one of: `float`, `long`, `int`
+        name: "Example"
+        units: km
+      dims: [time]
+      type: float
       attrs:
-        long_name: Example Var  # Label used by Xarray and other libraries for plotting
-        standard_name: ""       # Standard name from the CF Standard names table. 
-                                # Provide this if possible, otherwise remove it.
-        comment: ""             # User-friendly description of the property.
-        units: km               # Units attribute from the CF Standard list of units. 
-                                # Always provide this, even for 'unitless' quantities –
-                                # set `units: "1"` for such quantities.
-    
+        long_name: Example Var
+        units: km
+
     latitude:
-      data: 39.90891
+      data: 39.90891 {% if cookiecutter.add_help == "yes" %}# You can specify the data value directly like this{% endif %}
       type: float
       attrs:
         long_name: "North latitude"
@@ -91,16 +132,29 @@ dataset_definition:
         comment: "Recorded altitude at the instrument location"
         units: m
     
-#-----------------------------------------------------------------
-quality_management:
+# --------------------------------------------------------------------------------------
 
-  #---------------------------------------------------------------
+quality_management: {% if cookiecutter.add_help == "yes" %}
+  # This section of the pipeline configuration file is all about detecting and managing
+  # data quality issues. Each config block has three main sections:
+  #
+  # 1) checker - tells tsdat what QualityChecker to use to detect quality issues
+  # 2) handlers - tells tsdat which QualityHandler(s) to use to handle quality issues
+  # 3) variables / exclude - tells tsdat which variables should be checked{% endif %}
+
   manage_missing_coordinates:
-    checker:
+    checker: {% if cookiecutter.add_help == "yes" %}
+      # Tells tsdat which QualityChecker should be used to identify quality issues. Here
+      # we use the built-in CheckMissing class in the tsdat.qc.checkers module.{% endif %}
       classname: tsdat.qc.checkers.CheckMissing
-    handlers:
+    handlers: {% if cookiecutter.add_help == "yes" %}
+      # Tells tsdat which QualityHandler(s) should be used to handle quality issues. In
+      # this case we only use one handler, which fails the pipeline.{% endif %}
       - classname: tsdat.qc.handlers.FailPipeline
-    variables:
+    variables: {% if cookiecutter.add_help == "yes" %}
+      # COORDS is a keyword which tells tsdat to only run this quality manager for
+      # coordinate variables, which are just variables that also are dimensions. In this
+      # dataset 'time' is the only coordinate variable.{% endif %}
       - COORDS
 
   manage_coordinate_monotonicity:
@@ -114,24 +168,49 @@ quality_management:
     variables:
       - COORDS
 
-  #---------------------------------------------------------------
   manage_missing_values:
     checker:
-      classname: tsdat.qc.checkers.CheckMissing
-    handlers:
-      - classname: tsdat.qc.handlers.RemoveFailedValues
+      classname: tsdat.qc.checkers.CheckMissing {% if cookiecutter.add_help == "yes" %}
+    {%endif%}
+    handlers: {% if cookiecutter.add_help == "yes" %}
+      # The RemoveFailedValues handler replaces values that are missing with the
+      # variable's _FillValue (from CF Conventions), which defaults to -9999. Xarray and
+      # other netCDF libraries will interpret this as a NaN.{% endif %}
+      - classname: tsdat.qc.handlers.RemoveFailedValues {% if cookiecutter.add_help == "yes" %}
+
+      # For each variable the RecordQualityResults handler is applied to, a qc variable
+      # is created (or updated, if it exists) whose purpose is to track the specific
+      # test(s) and data indexes that failed. It uses a bit-packing approach to store
+      # the results of tests.{% endif %}
       - classname: tsdat.qc.handlers.RecordQualityResults
         parameters:
           bit: 1
           assessment: Bad
-          meaning: "Value is equal to _FillValue or NaN"
-    variables:
-      - DATA_VARS
-    exclude: [latitude, longitude, altitude]
+          meaning: "Value is equal to _FillValue or NaN" {% if cookiecutter.add_help == "yes" %}
+    {%endif%}
+    variables: {% if cookiecutter.add_help == "yes" %}
+      # DATA_VARS is a keyword which tells tsdat to only run this quality manager for
+      # data variables, which are all non-coordinate variables are dimensions. In this
+      # dataset 'example_var', 'latitude', 'longitude', and 'altitude' are all data
+      # variables{% endif %}
+      - DATA_VARS {% if cookiecutter.add_help == "yes" %}
+    {%endif%}
+    {% if cookiecutter.add_help == "yes" %}exclude:
+      # The exclude keyword tells tsdat to skip this check for specific variables that
+      # would otherwise have been selected. Note that here we opt to skip the latitude,
+      # longitude, and altitude variables since we set their data values in this config
+      # file - no need to analyze the quality of that data, we already know it's valid.
+      - latitude
+      - longitude
+      - altitude{% endif %}{% if cookiecutter.add_help == "no" %}exclude: [latitude, longitude, altitude]{% endif %}
+    
 {% if cookiecutter.use_custom_qc == "yes" %}
   # TODO – Developer: Update this as needed.
   manage_custom_qc:  # Rename this
     checker:
       classname: ingest.{{ cookiecutter.ingest_slug }}.pipeline.qc.CustomQualityChecker
     handlers:
-      - classname: ingest.{{ cookiecutter.ingest_slug }}.pipeline.qc.CustomQualityHandler{% endif %}
+      - classname: ingest.{{ cookiecutter.ingest_slug }}.pipeline.qc.CustomQualityHandler
+    variables:
+     - DATA_VARS
+    exclude: [latitude, longitude, altitude]{% endif %}
