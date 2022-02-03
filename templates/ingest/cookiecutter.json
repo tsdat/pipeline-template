@@ -13,5 +13,9 @@
     "use_custom_qc": [
         "no",
         "yes"
+    ],
+    "add_help": [
+        "yes",
+        "no"
     ]
 }

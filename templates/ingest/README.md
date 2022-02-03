@@ -28,5 +28,6 @@ the documentation below for more information regarding these prompts.
 | `ingest`                 | `Ingest Name`         | Verbose name of the ingest. Used in README.md                                                                                       |
 | `ingest_slug`            | `ingest_name`         | Name used for the ingest module. Should take the format: `type_make_model_loc` (e.g., `lidar_halo_xrp_nwtc`)                        |
 | `description`            | `description`         | A brief description of the ingest. Used in README.md                                                                                |
-| `use_custom_filehandler` | `yes`                 | Flag to generate a custom FileHandler template. Use this if data cannot be read in using out-of-box FileHandlers provided by tsdat. |
-| `use_custom_qc`          | `yes`                 | Flag to generate a custom QC template module. Use this if you want to apply custom quality checks or handlers.                      |
+| `use_custom_filehandler` | `no`                  | Flag to generate a custom FileHandler template. Use this if data cannot be read in using out-of-box FileHandlers provided by tsdat. |
+| `use_custom_qc`          | `no`                  | Flag to generate a custom QC template module. Use this if you want to apply custom quality checks or handlers.                      |
+| `add_help`               | `yes`                 | Flag to generate additional help text (i.e. descriptions of config file properties, extra comments, etc).                           |

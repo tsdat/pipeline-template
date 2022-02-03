@@ -1,55 +1,115 @@
-
-storage:
-
-  # This section should not be modified unless there is a strong need. Please contact
-  # the repository maintainers if you feel you need to use different settings here –
-  # there may be another way to accomplish what you need.
-  classname:  ${STORAGE_CLASSNAME}
+{% if cookiecutter.add_help == "yes" %}storage:
+  # This section should not be modified unless there is a strong need. It is set up to
+  # use environment variables to set the settings. These variables are automatically set
+  # by the various entry points to this ingest and should not be modified unless you
+  # know what you are doing.
+  classname: ${STORAGE_CLASSNAME}
   parameters:
     retain_input_files: ${RETAIN_INPUT_FILES}
     root_dir: ${ROOT_DIR}
     bucket_name: ${STORAGE_BUCKET}
 
+  # TODO – Developer: Update the file_handlers as needed
   file_handlers:
+    # FileHandlers are split into two categories: those used for reading input, and
+    # those meant for writing output files. Each FileHandler configuration block
+    # consists of the following components:
+    #
+    # 1) label (e.g. 'netcdf') - solely used for orgnaization within this config file
+    # 2) file_pattern - a regex string (or list of strings) for which the FileHandler
+    # should be used. Only applicable for input FileHandlers.
+    # 3) file_extension - the file extension. Used in output FileHandlers, but also
+    # can be used in place of a file_pattern for input FileHandlers.
+    # 4) classname - tells which FileHandler should be used
+    # 5) parameters - additonal parameters that will be passed to the FileHandler for it
+    # to use as it sees fit.
 
-    input:
-    {% if cookiecutter.use_custom_filehandler not in ["n", "N", "no", "No"] %}
-      # TODO – Developer: Update the FileHandler here as needed
-      my_custom_format:           # Solely used as a label. See the 'csv' input
-                                  # filehandler below 
-        file_pattern: '.*'        # The regex pattern used to match to an input file.
-                                  # Note this will only be applied to files already
-                                  # matched by a mapping in mapping.py, so .* is fine
-                                  # unless you need to use multiple handlers within
-                                  # those matched files.
+    input: {% if cookiecutter.use_custom_filehandler == "yes" %}
+      my_custom_format:
+        # This is where you define/configure your custom FileHandler for use in your
+        # pipeline. At a minimum, you should update the file_pattern and classname
+        # options so that they match your data and python class name, respectively. We
+        # also recommend adding parameters if possible so that your code is more
+        # modular and reusable. See the csv configuration below as well as the tsdat
+        # CsvHandler implementation for more information as needed.
+        file_pattern: '.*\.custom_extension'
         classname: ingest.{{ cookiecutter.ingest_slug }}.pipeline.filehandler.CustomFileHandler
-      
-      # TODO – Developer: Delete this if you don't want to use the CsvHandler
-      # You can also use built-in tsdat FileHandlers, which support a number of custom
-      # parameters: https://tsdat.rtfd.io/en/latest/autoapi/tsdat/io/filehandlers/
+        # parameters:
+        #   # If you choose, you can define parameters here that will be available for
+        #   # you to use in your custom FileHandler. This is entirely optional, but we
+        #   # highly recommend making good use of it.
+        #   read:
+        #     some_custom_option: True
+
       # csv:
-      #   file_pattern: '.*\.csv'                       # Matches files ending in '.csv'
-      #   classname: tsdat.io.filehandlers.CsvHandler   # FileHandler module to use
+      #   # Here we define single FileHandler for reading input data. The FileHandler is
+      #   # configured to run for files ending in '.csv' and uses the built-in
+      #   # CsvHandler from the tsdat.io.filehandlers module with some specific parameters
+      #   # that help us read data from our example csv file.
+      #   file_pattern: '.*\.csv'
+      #   classname: tsdat.io.filehandlers.CsvHandler
       #   parameters:
       #     read:
+      #       # You can add parameters that are passed to pandas.read_csv() as keyword
+      #       # arguments. See the pandas.read_csv() docs for more details.
       #       read_csv:
-      #         # Parameters here will be passed to pd.read_csv() as kwargs
-    {% else %}# TODO – Developer: Update the csv handler as needed
+      #         index_col: False # Treat the first column (time) as a data variable
+      #         header: 2 # Where to look for the header (header = line number - 1){% else %}
       csv:
-        file_pattern: '.*\.csv'                       # Matches files ending in '.csv'
-        classname: tsdat.io.filehandlers.CsvHandler   # FileHandler module to use
-        parameters:     # Parameters to pass to CsvHandler. Comment out if not using.
+        # Here we define single FileHandler for reading input data. The FileHandler is
+        # configured to run for files ending in '.csv' and uses the built-in
+        # CsvHandler from the tsdat.io.filehandlers module with some specific parameters
+        # that help us read data from our example csv file.
+        file_pattern: '.*\.csv'
+        classname: tsdat.io.filehandlers.CsvHandler
+        parameters:
           read:
-            # You can add parameters that are passed to pandas.read_csv() as kwargs:
+            # You can add parameters that are passed to pandas.read_csv() as keyword
+            # arguments. See the pandas.read_csv() docs for more details.
             read_csv:
-              index_col: False      # Treat the first column (time) as a data variable
-              header: 2             # Where to look for the header (header line number - 1) 
+              index_col: False # Treat the first column (time) as a data variable
+              header: 2 # Where to look for the header (header = line number - 1){% endif %}   
 
-    {% endif %}
-    # The output section should not be modified unless there is a strong need. Please
-    # contact the repository maintainers if you feel you need to write to a different
-    # format.
+    output:
+      # We highly recommend writing to the netcdf format whenever possible, as this format
+      # preserves the data structure and metadata as configured in the pipeline config
+      # file, however we recognize that sometimes this is not possible. Our recommendation
+      # in these situations is to just be aware that many formats (such as csv) do not
+      # support embedding metadata into your output files, so you should careful consider
+      # how metadata is captured and reported so as to avoid data loss.
+      
+      netcdf:
+        file_extension: ".nc"
+        classname: tsdat.io.filehandlers.NetCdfHandler
+{% else %}storage:
+  # This section should not be modified unless there is a strong need. It is set up to
+  # use environment variables to set the settings. These variables are automatically set
+  # by the various entry points to this ingest and should not be modified unless you
+  # know what you are doing.
+  classname: ${STORAGE_CLASSNAME}
+  parameters:
+    retain_input_files: ${RETAIN_INPUT_FILES}
+    root_dir: ${ROOT_DIR}
+    bucket_name: ${STORAGE_BUCKET}
+
+  # TODO – Developer: Update the file_handlers as needed
+  file_handlers:
+    input: {% if cookiecutter.use_custom_filehandler == "yes" %}
+      my_custom_format:
+        file_pattern: '.*\.custom_extension'
+        classname: ingest.{{ cookiecutter.ingest_slug }}.pipeline.filehandler.CustomFileHandler{% else %}
+
+      csv:
+        file_pattern: '.*\.csv'
+        classname: tsdat.io.filehandlers.CsvHandler
+        parameters:
+          read:
+            read_csv:
+              index_col: False
+              header: 2{% endif %}
+
     output:
       netcdf:
-        file_extension: '.nc'
+        file_extension: ".nc"
         classname: tsdat.io.filehandlers.NetCdfHandler
+{% endif %}
