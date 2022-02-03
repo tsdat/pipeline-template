@@ -24,22 +24,6 @@ storage:
     # to use as it sees fit.
 
     input:
-      my_custom_format:
-        # This is where you define/configure your custom FileHandler for use in your
-        # pipeline. At a minimum, you should update the file_pattern and classname
-        # options so that they match your data and python class name, respectively. We
-        # also recommend adding parameters if possible so that your code is more
-        # modular and reusable. See the csv configuration below as well as the tsdat
-        # CsvHandler implementation for more information as needed.
-        file_pattern: '.*\.custom_extension'
-        classname: ingest.{{ cookiecutter.ingest_slug }}.pipeline.filehandler.CustomFileHandler
-        # parameters:
-        #   # If you choose, you can define parameters here that will be available for
-        #   # you to use in your custom FileHandler. This is entirely optional, but we
-        #   # highly recommend making good use of it.
-        #   read:
-        #     some_custom_option: True
-
       csv:
         # Here we define single FileHandler for reading input data. The FileHandler is
         # configured to run for files ending in '.csv' and uses the built-in
