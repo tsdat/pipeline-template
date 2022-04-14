@@ -1,14 +1,14 @@
 import os
 import xarray as xr
 from utils import expand, set_env
-from ingest.example_ingest_pnnl import Pipeline
+from ingest.example_ingest_pnnl import PipelineCustom
 
 parent = os.path.dirname(__file__)
 
 
 def test_example_ingest_pnnl_pipeline():
     set_env()
-    pipeline = Pipeline(
+    pipeline = PipelineCustom(
         expand("config/pipeline_config_example_ingest_pnnl.yml", parent),
         expand("config/storage_config_example_ingest_pnnl.yml", parent),
     )

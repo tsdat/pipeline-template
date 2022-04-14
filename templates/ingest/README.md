@@ -1,4 +1,4 @@
-# Ingest Pipeline Cookiecutter
+# Ingest PipelineCustom Cookiecutter
 
 This cookiecutter template is intended to be used to generate boilerplate pipeline code
 to accelerate the development of ingest pipelines.
