@@ -4,7 +4,7 @@ from tsdat.qc import QualityManagement
 from typing import Union, List, Dict
 
 
-class IngestPipeline(IngestPipeline):
+class IngestPipelineUtils(IngestPipeline):
     def run(self, filepath: Union[str, List[str]]) -> xr.Dataset:
         """----------------------------------------------------------------------------
         Runs the pipeline from start to finish.
@@ -51,7 +51,7 @@ class IngestPipeline(IngestPipeline):
 
     def run_plots(self, files: Union[List[S3Path], List[str]]):
         """----------------------------------------------------------------------------
-        Runs the `IngestPipeline.hook_generate_and_persist_plots()` function on the
+        Runs the `IngestPipelineUtils.hook_generate_and_persist_plots()` function on the
         provided file or list of files. This is useful for re-running plots without the
         need to also reprocess the data.
 
