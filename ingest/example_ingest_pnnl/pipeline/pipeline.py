@@ -8,7 +8,7 @@ from tsdat import DSUtil
 from typing import Dict
 
 
-class PipelineCustom(TemplatePipeline):
+class CustomPipeline(TemplatePipeline):
     """--------------------------------------------------------------------------------
     EXAMPLE INGEST INGESTION PIPELINE
 

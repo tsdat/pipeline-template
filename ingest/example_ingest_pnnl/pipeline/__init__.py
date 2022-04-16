@@ -1,4 +1,4 @@
-from .pipeline import PipelineCustom
+from .pipeline import CustomPipeline
 from . import (
     pipeline,
 )
