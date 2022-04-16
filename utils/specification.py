@@ -1,17 +1,17 @@
 import os
-from .pipeline import IngestPipeline
+from .pipeline import TemplatePipeline
 
 
 class IngestSpec:
     """----------------------------------------------------------------------------
-    Class to group the object and specifications needed to create an IngestPipeline
+    Class to group the object and specifications needed to create an TemplatePipeline
     instance that will be used to ingest data.
 
     ----------------------------------------------------------------------------"""
 
     def __init__(
         self,
-        pipeline: IngestPipeline,
+        pipeline: TemplatePipeline,
         pipeline_config: str,
         storage_config: str,
         name: str,
@@ -20,7 +20,7 @@ class IngestSpec:
         Instantiates an IngestSpec class.
 
         Args:
-            pipeline (IngestPipeline): A child class derived from the `IngestPipeline`
+            pipeline (IngestPipeline): A child class derived from the `TemplatePipeline`
             parent class.
             pipeline_config (str): The path to the pipeline config file.
             storage_config (str): The path to the storage config file.
@@ -29,7 +29,7 @@ class IngestSpec:
             purposes.
 
         ----------------------------------------------------------------------------"""
-        assert issubclass(pipeline, IngestPipeline)
+        assert issubclass(pipeline, TemplatePipeline)
         assert os.path.isfile(pipeline_config)
         assert os.path.isfile(storage_config)
 
@@ -38,7 +38,7 @@ class IngestSpec:
         self.storage_config = storage_config
         self.name = name
 
-    def instantiate(self) -> IngestPipeline:
+    def instantiate(self) -> TemplatePipeline:
         """----------------------------------------------------------------------------
         Instantiates the pipeline using the previously-provided specifications.
 
