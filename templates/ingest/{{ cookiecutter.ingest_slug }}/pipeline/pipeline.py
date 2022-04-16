@@ -14,7 +14,7 @@ from utils import TemplatePipeline, format_time_xticks
 # plots, as applicable. Remove any unused code.
 
 
-class PipelineCustom(TemplatePipeline):
+class CustomPipeline(TemplatePipeline):
     """--------------------------------------------------------------------------------
     {{ cookiecutter.ingest.upper() }} INGESTION PIPELINE
 
