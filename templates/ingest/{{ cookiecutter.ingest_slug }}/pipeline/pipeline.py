@@ -7,14 +7,14 @@ import matplotlib.pyplot as plt
 
 from typing import Dict
 from tsdat import DSUtil
-from utils import IngestPipelineUtils, format_time_xticks
+from utils import TemplatePipeline, format_time_xticks
 
 
 # TODO – Developer: Use hooks to add custom functionality to the pipeline including
 # plots, as applicable. Remove any unused code.
 
 
-class PipelineCustom(IngestPipelineUtils):
+class PipelineCustom(TemplatePipeline):
     """--------------------------------------------------------------------------------
     {{ cookiecutter.ingest.upper() }} INGESTION PIPELINE
 
