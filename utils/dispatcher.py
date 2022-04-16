@@ -1,5 +1,5 @@
 # This class dispatches the pipeline based on an input. It selects the appopriate
-# method (CustomPipeline.run(...) vs CustomPipeline.run_plots(...)) based on mapping – if "plots"
+# method (Pipeline.run(...) vs Pipeline.run_plots(...)) based on mapping – if "plots"
 # is part of the IngestSpec.name string then dispatch to _run_plots()
 
 import logging
@@ -27,7 +27,7 @@ class PipelineDispatcher:
             in AWS mode or string paths if running in local mode.
 
         Returns:
-            bool: True if the CustomPipeline and method were dispatched and ran without
+            bool: True if the Pipeline and method were dispatched and ran without
             error, False otherwise.
 
         ----------------------------------------------------------------------------"""
@@ -50,7 +50,7 @@ class PipelineDispatcher:
             else:
                 pipeline.run(input_files)
         except BaseException:
-            logger.exception("CustomPipeline failed on input files: %s", input_files)
+            logger.exception("Pipeline failed on input files: %s", input_files)
             status = False
 
         return status
