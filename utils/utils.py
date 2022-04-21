@@ -34,8 +34,8 @@ def format_time_xticks(
         to "%H-%M".
 
     ----------------------------------------------------------------------------"""
-    ax.xaxis.set_major_locator(mpl.dates.HourLocator(byhour=range(start, stop, step)))
-    ax.xaxis.set_major_formatter(mpl.dates.DateFormatter(date_format))
+    ax.xaxis.set_major_locator(mpl.dates.HourLocator(byhour=range(start, stop, step)))  # type: ignore
+    ax.xaxis.set_major_formatter(mpl.dates.DateFormatter(date_format))  # type: ignore
     plt.setp(ax.xaxis.get_majorticklabels(), rotation=0)
 
 

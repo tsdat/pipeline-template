@@ -1,0 +1,18 @@
+classname: tsdat.pipeline.ingest.IngestPipeline
+
+triggers:
+  - .*morro.*\.csv
+
+retriever:
+  path: pipelines/example_ingest/config/retriever.yaml
+
+dataset:
+  path: pipelines/example_ingest/config/dataset.yaml
+  overrides:
+    /attrs/location_id: morro
+
+quality:
+  path: shared/config/basic-quality.yaml
+
+storage:
+  path: shared/config/storage.yaml

@@ -1,0 +1,8 @@
+managers:
+  - name: todo
+    checker:
+      classname: todo
+    handlers:
+      - classname: todo
+    apply_to:
+      - todo

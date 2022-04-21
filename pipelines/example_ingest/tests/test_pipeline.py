@@ -1,7 +1,7 @@
 import os
 import xarray as xr
 from utils import expand, set_env
-from ingest.example_ingest_pnnl import CustomPipeline
+from pipelines.example_ingest_pnnl import CustomPipeline
 
 parent = os.path.dirname(__file__)
 

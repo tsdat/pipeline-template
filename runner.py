@@ -5,6 +5,7 @@ from typing import List
 from pathlib import Path
 from enum import Enum
 from utils import PipelineDispatcher, set_env
+from utils.registry import PipelineRegistry
 
 
 # TODO: Examine logging more closely –  can this be improved?
@@ -15,7 +16,7 @@ app = typer.Typer(add_completion=False)
 
 @app.command()
 def run_pipeline(
-    files: List[Path] = typer.Argument(
+    filepaths: List[Path] = typer.Argument(
         ...,
         exists=True,
         file_okay=True,
@@ -30,6 +31,7 @@ def run_pipeline(
         " results in one output data file being produced. Omit this option to run files"
         " independently and generally produce one output data file for each input file.",
     ),
+    # ingest: str = typer.Option() # TODO: Ability to run a specific ingest / folder
 ):
     """Main entry point to the ingest controller. This script takes a path to an input
     file, automatically determines which ingest(s) to use, and runs those ingests on the
@@ -37,15 +39,15 @@ def run_pipeline(
     set_env()
 
     # Downstream code expects a list of strings
-    files: List[str] = [str(file) for file in files]
+    files = [str(file) for file in filepaths]
     logger.debug(f"Found input files: {files}")
 
     if clump:
         files = [files]
 
     # Run the pipeline on the input files
-    dispatcher = PipelineDispatcher(auto_discover=True)
-    logger.debug(f"Discovered ingest modules: \n{dispatcher._cache._modules}")
+    dispatcher = PipelineRegistry()
+    logger.debug(f"Discovered ingest modules: \n{dispatcher._modules}")
 
     successes = 0
     failures = 0

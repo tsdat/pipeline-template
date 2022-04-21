@@ -3,12 +3,12 @@ import xarray as xr
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from utils import TemplatePipeline, format_time_xticks
+from utils import IngestPipeline, format_time_xticks
 from tsdat import DSUtil
 from typing import Dict
 
 
-class CustomPipeline(TemplatePipeline):
+class CustomPipeline(IngestPipeline):
     """--------------------------------------------------------------------------------
     EXAMPLE INGEST INGESTION PIPELINE
 

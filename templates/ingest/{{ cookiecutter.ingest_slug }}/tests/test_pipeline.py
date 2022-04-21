@@ -1,7 +1,7 @@
 import os
 import xarray as xr
 from utils import expand, set_env
-from ingest.{{ cookiecutter.ingest_slug }} import CustomPipeline
+from pipelines.{{ cookiecutter.ingest_slug }} import CustomPipeline
 
 parent = os.path.dirname(__file__)
 
