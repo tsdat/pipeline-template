@@ -4,26 +4,14 @@ from tsdat import IngestPipeline, get_start_date_and_time_str, get_filename
 from utils import format_time_xticks
 
 
-class CustomPipeline(IngestPipeline):
+class ExamplePipeline(IngestPipeline):
     """---------------------------------------------------------------------------------
     This is an example ingestion pipeline meant to demonstrate how one might set up a
     pipeline using this template repository.
 
     ---------------------------------------------------------------------------------"""
 
-    # DEVELOPER: Update docstring ^ and refactor pipeline name as needed
-
-    def hook_customize_dataset(self, dataset: xr.Dataset) -> xr.Dataset:
-        # DEVELOPER: (Optional) Use this hook to modify the dataset before qc is applied
-        return dataset
-
-    def hook_finalize_dataset(self, dataset: xr.Dataset) -> xr.Dataset:
-        # DEVELOPER: (Optional) Use this hook to modify the dataset after qc is applied
-        # but before it gets saved to the storage area
-        return dataset
-
     def hook_plot_dataset(self, dataset: xr.Dataset):
-        # DEVELOPER: (Optional, recommended) Create plots.
         location = self.dataset_config.attrs.location_id
         datastream: str = self.dataset_config.attrs.datastream
 

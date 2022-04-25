@@ -8,9 +8,11 @@ def test_example_ingest_pipeline():
     config = PipelineConfig.from_yaml(config_path)
     pipeline = config.instaniate_pipeline()
 
-    test_file = "pipelines/example_ingest/tests/data/input/data.csv"
-    expected_file = "pipelines/example_ingest/tests/data/expected/pnnl.example_ingest.b1.20211114.000000.nc"
+    test_file = "pipelines/example_ingest/test/data/input/data.csv"
+    expected_file = (
+        "pipelines/example_ingest/test/data/expected/abc.example.a1.20220424.000000.nc"
+    )
 
-    dataset = pipeline.run(test_file)
+    dataset = pipeline.run([test_file])
     expected: xr.Dataset = xr.open_dataset(expected_file)  # type: ignore
-    assert_close(dataset, expected)
+    assert_close(dataset, expected, check_fill_value=False)

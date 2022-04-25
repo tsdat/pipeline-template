@@ -1,10 +1,9 @@
-# DEVELOPER: Specify the coords/data_vars that should be retrieved from any inputs
-classname: tsdat.io.retriever.DefaultRetriever
+classname: tsdat.io.retrievers.DefaultRetriever
 readers:
   csv:
     classname: tsdat.io.readers.CSVReader
     parameters:
-      read_csv:
+      read_csv_kwargs:
         # This treats the first column (time) as a data variable, which helps for when
         # the pandas DataFrame is converted to an xarray Dataset
         index_col: false

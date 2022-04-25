@@ -1,12 +1,9 @@
-# DEVELOPER: Add attrs and coords/variables to specify the output data structure
-
-# TODO: Make sure the data/vars/attrs matches the example dataset
 attrs:
   title: title
   description: description
   location_id: abc
   dataset_name: example
-  data_level: b1
+  data_level: a1
 
 coords:
   time:
@@ -21,10 +18,3 @@ data_vars:
     dtype: float
     attrs:
       units: km
-
-  pi:
-    data: 3.14159
-    dims: []
-    dtype: float
-    attrs:
-      units: "1"

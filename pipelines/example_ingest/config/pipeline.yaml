@@ -1,7 +1,6 @@
-classname: tsdat.pipeline.ingest.IngestPipeline
+classname: pipelines.example_ingest.pipeline.ExamplePipeline
 
 triggers:
-  # DEVELOPER: Update regex patterns that should trigger this pipeline
   - .*example_ingest.*\.csv
 
 retriever:
@@ -11,8 +10,7 @@ dataset:
   path: pipelines/example_ingest/config/dataset.yaml
 
 quality:
-  # path: shared/config/custom-quality.yaml # COOKIECUTTER
-  path: shared/config/default-quality.yaml
+  path: shared/quality.yaml
 
 storage:
-  path: shared/config/storage.yaml
+  path: shared/storage.yaml
