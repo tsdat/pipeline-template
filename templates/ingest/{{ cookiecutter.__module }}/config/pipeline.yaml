@@ -1,0 +1,17 @@
+classname: pipelines.{{ cookiecutter.__module }}.pipeline.{{ cookiecutter.__classname }}
+
+triggers:
+  # DEVELOPER: Update regex patterns that should trigger this pipeline
+  - .*{{ cookiecutter.__location_id}}.*\.csv
+
+retriever:
+  path: pipelines/example_ingest/config/retriever.yaml
+
+dataset:
+  path: pipelines/example_ingest/config/dataset.yaml
+
+quality:
+  path: pipelines/example_ingest/config/quality.yaml
+
+storage:
+  path: shared/config/storage.yaml
