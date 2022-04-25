@@ -2,7 +2,7 @@ import os
 import subprocess
 from pathlib import Path
 
-PROJECT_DIR = Path.cwd()
+PROJECT_DIR = Path.cwd() / "pipelines" / "{{ cookiecutter.__module }}"
 
 
 def main():
