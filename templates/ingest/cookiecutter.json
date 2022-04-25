@@ -15,6 +15,6 @@
         "yes"
     ],
     "module": "{{ cookiecutter.ingest_name | slugify(separator='_') }}",
-    "classname": "{{ cookiecutter.module | title | replace('_', '') }}",
+    "classname": "{{ cookiecutter.module | replace('_', ' ') | title | replace(' ', '') }}",
     "location_id": "{{ cookiecutter.ingest_location | slugify(separator='_') }}"
 }

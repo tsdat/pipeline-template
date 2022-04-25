@@ -1,9 +1,7 @@
 classname: tsdat.io.retrievers.DefaultRetriever
 readers:
   csv:
-    classname:
-      '{% if cookiecutter.use_custom_data_reader == "no" %}tsdat.io.readers.CSVReader{%
-      else %}pipelines.{{ cookiecutter.module }}.readers.CustomDataReader{% endif %}'
+    classname: {% if cookiecutter.use_custom_data_reader == "no" %}tsdat.io.readers.CSVReader{%else %}pipelines.{{ cookiecutter.module }}.readers.CustomDataReader{% endif %}
 
 coords:
   # DEVELOPER: Specify the coords/data_vars that should be retrieved from any inputs
@@ -15,8 +13,8 @@ coords:
       # The name of the input variable as returned by the selected reader. If using a
       # built-in DataReader like the CSVReader or NetCDFReader, then will be exactly the
       # same as the name of the variable in the input file.
-
       name: Timestamp (end of interval)
+
       # Optionally specify converters to run. The one below converts string values into
       # datetime64 objects. It requests two arguments: format and timezone. Format is
       # the string time format of the input data (see strftime.org for more info), and
@@ -33,3 +31,4 @@ data_vars:
       data_converters:
         - classname: tsdat.io.converters.UnitsConverter
           input_units: km
+        {% if cookiecutter.use_custom_data_converter == "yes" %}- classname: pipelines.{{ cookiecutter.module }}.converters.CustomDataConverter{% endif %}

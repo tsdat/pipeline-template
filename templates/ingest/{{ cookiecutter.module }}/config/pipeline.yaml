@@ -5,13 +5,13 @@ triggers:
   - .*{{ cookiecutter.location_id}}.*\.csv
 
 retriever:
-  path: pipelines/example_ingest/config/retriever.yaml
+  path: pipelines/{{ cookiecutter.module }}/config/retriever.yaml
 
 dataset:
-  path: pipelines/example_ingest/config/dataset.yaml
+  path: pipelines/{{ cookiecutter.module }}/config/dataset.yaml
 
 quality:
-  path: pipelines/example_ingest/config/quality.yaml
+  path: pipelines/{{ cookiecutter.module }}/config/quality.yaml
 
 storage:
   path: shared/config/storage.yaml

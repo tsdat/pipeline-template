@@ -2,10 +2,10 @@
 managers:
   - name: Custom Quality Check and Corrections
     checker:
-      classname: pipelines.example_ingest.qc.CustomQualityChecker
+      classname: pipelines.{{ cookiecutter.module }}.qc.CustomQualityChecker
       parameters: {}
     handlers:
-      - classname: pipelines.example_ingest.qc.CustomQualityHandler
+      - classname: pipelines.{{ cookiecutter.module }}.qc.CustomQualityHandler
         parameters: {}
     apply_to:
       # keyword for coordinate variables (e.g., 'time')
