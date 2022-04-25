@@ -1,6 +1,4 @@
 tsdat == 1.0.0
 xarray[complete]
-numpy
-matplotlib
 act-atmos
 typer

@@ -29,7 +29,7 @@ def run_pipeline(
         " results in one output data file being produced. Omit this option to run files"
         " independently and generally produce one output data file for each input file.",
     ),
-    # pipeline: str = typer.Option() # TODO: Ability to run a specific ingest / folder
+    # pipeline: str = typer.Option() # IDEA: Ability to run a specific ingest / folder
 ):
     """Main entry point to the ingest controller. This script takes a path to an input
     file, automatically determines which ingest(s) to use, and runs those ingests on the
