@@ -1,14 +1,12 @@
-import typer
 import logging
-
-from typing import List
 from pathlib import Path
-from enum import Enum
-from utils import PipelineDispatcher, set_env
+from typing import List
+
+import typer
+
 from utils.registry import PipelineRegistry
 
 
-# TODO: Examine logging more closely –  can this be improved?
 logger = logging.getLogger(__name__)
 
 app = typer.Typer(add_completion=False)
@@ -31,36 +29,19 @@ def run_pipeline(
         " results in one output data file being produced. Omit this option to run files"
         " independently and generally produce one output data file for each input file.",
     ),
-    # ingest: str = typer.Option() # TODO: Ability to run a specific ingest / folder
+    # pipeline: str = typer.Option() # TODO: Ability to run a specific ingest / folder
 ):
     """Main entry point to the ingest controller. This script takes a path to an input
     file, automatically determines which ingest(s) to use, and runs those ingests on the
     provided input data."""
-    set_env()
 
     # Downstream code expects a list of strings
     files = [str(file) for file in filepaths]
     logger.debug(f"Found input files: {files}")
 
-    if clump:
-        files = [files]
-
     # Run the pipeline on the input files
     dispatcher = PipelineRegistry()
-    logger.debug(f"Discovered ingest modules: \n{dispatcher._modules}")
-
-    successes = 0
-    failures = 0
-    for file in files:
-        success = dispatcher.dispatch(file)  # Automatically catches and logs exceptions
-        if success:
-            logger.info("Successfully processed input: '%s'", file)
-            successes += 1
-        else:
-            logger.warning("Failed to process input: '%s'", file)
-            failures += 1
-
-    logger.info("Done! (%d succeeded, %d failed)", successes, failures)
+    dispatcher.dispatch(files, clump=clump)
 
 
 if __name__ == "__main__":

@@ -1,8 +1,6 @@
-tsdat == 0.2.12
-netcdf4
-xarray
+tsdat == 1.0.0
+xarray[complete]
 numpy
 matplotlib
 act-atmos
-parse
 typer

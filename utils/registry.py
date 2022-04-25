@@ -1,14 +1,12 @@
 import logging
 import re
-
-from tsdat.pipeline.pipeline import Pipeline
-from tsdat.config.pipeline import PipelineConfig
-from tsdat.config.utils import read_yaml
 from pathlib import Path
-from typing import AnyStr, Dict, List, Pattern
+from typing import Dict, List, Pattern
+from tsdat import PipelineConfig, read_yaml
 
 logger = logging.getLogger(__name__)
 
+__all__ = ["PipelineRegistry"]
 
 class PipelineRegistry:
     """---------------------------------------------------------------------------------
@@ -58,9 +56,8 @@ class PipelineRegistry:
             else:
                 config_file = config_files[0]
 
-                pipeline: Pipeline = PipelineConfig.from_yaml(
-                    config_file
-                ).instaniate_pipeline()
+                config = PipelineConfig.from_yaml(config_file)
+                pipeline = config.instaniate_pipeline()
                 inputs = input_keys if clump else input_key
                 logger.debug(
                     "Running pipeline %s on input %s",

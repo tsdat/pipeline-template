@@ -1,18 +1,18 @@
 classname: tsdat.pipeline.ingest.IngestPipeline
 
 triggers:
-  - .*humboldt.*\.csv
+  # DEVELOPER: Update regex patterns that should trigger this pipeline
+  - .*example_ingest.*\.csv
 
 retriever:
   path: pipelines/example_ingest/config/retriever.yaml
 
 dataset:
   path: pipelines/example_ingest/config/dataset.yaml
-  overrides:
-    /attrs/location_id: humboldt
 
 quality:
-  path: shared/config/basic-quality.yaml
+  # path: shared/config/custom-quality.yaml # COOKIECUTTER
+  path: shared/config/default-quality.yaml
 
 storage:
   path: shared/config/storage.yaml

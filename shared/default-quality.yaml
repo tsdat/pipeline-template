@@ -1,3 +1,4 @@
+# TODO: Define some default quality checks here
 managers:
   - name: todo
     checker:
