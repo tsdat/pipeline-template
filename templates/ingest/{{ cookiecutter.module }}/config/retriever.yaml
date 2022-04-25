@@ -3,7 +3,7 @@ readers:
   csv:
     classname:
       '{% if cookiecutter.use_custom_data_reader == "no" %}tsdat.io.readers.CSVReader{%
-      else %}pipelines.{{ cookiecutter.__module }}.readers.CustomDataReader{% endif %}'
+      else %}pipelines.{{ cookiecutter.module }}.readers.CustomDataReader{% endif %}'
 
 coords:
   # DEVELOPER: Specify the coords/data_vars that should be retrieved from any inputs

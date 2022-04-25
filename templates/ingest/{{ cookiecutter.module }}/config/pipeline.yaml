@@ -1,8 +1,8 @@
-classname: pipelines.{{ cookiecutter.__module }}.pipeline.{{ cookiecutter.__classname }}
+classname: pipelines.{{ cookiecutter.module }}.pipeline.{{ cookiecutter.classname }}
 
 triggers:
   # DEVELOPER: Update regex patterns that should trigger this pipeline
-  - .*{{ cookiecutter.__location_id}}.*\.csv
+  - .*{{ cookiecutter.location_id}}.*\.csv
 
 retriever:
   path: pipelines/example_ingest/config/retriever.yaml

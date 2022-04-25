@@ -1,10 +1,10 @@
 # DEVELOPER: Add attrs and coords/variables to specify the output data structure
 
 attrs:
-  title: {{ cookiecutter.name }}
-  description: {{ cookiecutter.description }}
-  location_id: {{ cookiecutter.__location_id }}
-  dataset_name: {{ cookiecutter.__module }}
+  title: {{ cookiecutter.ingest_name }}
+  description: {{ cookiecutter.ingest_description }}
+  location_id: {{ cookiecutter.location_id }}
+  dataset_name: {{ cookiecutter.module }}
   data_level: {% if cookiecutter.use_custom_qc == "no" %}a1{% else %}b1{% endif %}
   # qualifier: 
   # temporal: 

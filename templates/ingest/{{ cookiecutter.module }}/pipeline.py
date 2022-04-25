@@ -7,7 +7,7 @@ from tsdat import IngestPipeline  # , get_start_date_and_time_str, get_filename
 
 
 # DEVELOPER: Implement your pipeline and update its docstring.
-class {{ cookiecutter.__classname }}(IngestPipeline):
+class {{ cookiecutter.classname }}(IngestPipeline):
     """---------------------------------------------------------------------------------
     This is an example ingestion pipeline meant to demonstrate how one might set up a
     pipeline using this template repository.

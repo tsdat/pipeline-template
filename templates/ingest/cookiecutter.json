@@ -14,7 +14,7 @@
         "no",
         "yes"
     ],
-    "__module": "{{ cookiecutter.ingest_name | slugify(separator='_') }}",
-    "__classname": "{{ cookiecutter.__module | title | replace('_', '') }}",
-    "__location_id": "{{ cookiecutter.ingest_location | slugify(separator='_') }}"
+    "module": "{{ cookiecutter.ingest_name | slugify(separator='_') }}",
+    "classname": "{{ cookiecutter.module | title | replace('_', '') }}",
+    "location_id": "{{ cookiecutter.ingest_location | slugify(separator='_') }}"
 }
