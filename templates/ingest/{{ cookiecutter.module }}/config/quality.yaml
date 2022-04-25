@@ -1,10 +1,14 @@
 # DEVELOPER: Specify the quality checks and handlers that should be applied
 managers:
-  - name: The name of this quality check
+  - name: Custom Quality Check and Corrections
     checker:
       classname: pipelines.example_ingest.qc.CustomQualityChecker
       parameters: {}
     handlers:
       - classname: pipelines.example_ingest.qc.CustomQualityHandler
         parameters: {}
-    apply_to: [COORDS, DATA_VARS]
+    apply_to:
+      # keyword for coordinate variables (e.g., 'time')
+      - COORDS
+      # keyword for all other variables
+      - DATA_VARS
