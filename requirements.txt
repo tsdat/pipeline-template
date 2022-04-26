@@ -1,4 +1,4 @@
-tsdat == 1.0.0
+tsdat >=1.0.0, <1.1.0
 xarray[complete]
 act-atmos
 typer
