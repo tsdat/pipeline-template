@@ -1,0 +1,16 @@
+classname: pipelines.example_ingest.pipeline.ExamplePipeline
+
+triggers:
+  - .*example_ingest.*\.csv
+
+retriever:
+  path: pipelines/example_ingest/config/retriever.yaml
+
+dataset:
+  path: pipelines/example_ingest/config/dataset.yaml
+
+quality:
+  path: shared/quality.yaml
+
+storage:
+  path: shared/storage.yaml

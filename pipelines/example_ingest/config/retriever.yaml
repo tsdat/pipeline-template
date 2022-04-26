@@ -1,0 +1,29 @@
+classname: tsdat.io.retrievers.DefaultRetriever
+readers:
+  .*:
+    classname: tsdat.io.readers.CSVReader
+    parameters:
+      read_csv_kwargs:
+        # This treats the first column (time) as a data variable, which helps for when
+        # the pandas DataFrame is converted to an xarray Dataset
+        index_col: false
+
+        # This tells pandas to look at row index 2 (0-based) for the header
+        header: 2
+
+coords:
+  time:
+    .*:
+      name: Timestamp (end of interval)
+      data_converters:
+        - classname: tsdat.io.converters.StringToDatetime
+          format: "%Y-%m-%d %H:%M:%S"
+          timezone: UTC
+
+data_vars:
+  example_var:
+    .*:
+      name: Example
+      data_converters:
+        - classname: tsdat.io.converters.UnitsConverter
+          input_units: km
