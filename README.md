@@ -57,7 +57,7 @@ manage dependencies in your development environment.
     - Select the newly-created `ingest` conda environment from the drop-down list.
         > You may need to refresh the list (cycle icon in the top right) to see it.
     - Bring up the command pane and type `Developer: Reload Window` to reload VS Code
-    and ensure the settings changes propogate correctly.
+    and ensure the settings changes propagate correctly.
 
 
 ## Adding a new pipeline

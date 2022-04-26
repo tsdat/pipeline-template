@@ -57,7 +57,7 @@ class PipelineRegistry:
                 config_file = config_files[0]
 
                 config = PipelineConfig.from_yaml(config_file)
-                pipeline = config.instaniate_pipeline()
+                pipeline = config.instantiate_pipeline()
                 inputs = input_keys if clump else input_key
                 logger.debug(
                     "Running pipeline %s on input %s",
