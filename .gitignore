@@ -4,3 +4,11 @@ __pycache__
 **storage/
 .idea/
 typings/
+.coverage
+.mypy_cache
+.DS_Store
+.idea/
+.history/
+.pytest_cache/
+htmlcov/
+typings/
