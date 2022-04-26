@@ -7,7 +7,7 @@ from tsdat import PipelineConfig, assert_close
 def test_{{ cookiecutter.module }}_pipeline():
     config_path = Path("pipelines/{{ cookiecutter.module }}/config/pipeline.yaml")
     config = PipelineConfig.from_yaml(config_path)
-    pipeline = config.instaniate_pipeline()
+    pipeline = config.instantiate_pipeline()
 
     test_file = "pipelines/{{ cookiecutter.module }}/tests/data/input/data.csv"
     expected_file = "pipelines/{{ cookiecutter.module }}/tests/data/expected/abc.example.a1.20220424.000000.nc"

@@ -9,7 +9,7 @@ repository or any of its ingests are used in a production environment.
 1. Ensure that your development environment is set up according to
 [the instructions](../../README.md#development-environment-setup).
 
-2. Use the `TODO-Tree` VS Code extension or use the search tool to find occurances of
+2. Use the `TODO-Tree` VS Code extension or use the search tool to find occurrences of
 "`# DEVELOPER:`". Each instance of this requires your attention. Attend to all the
 developer todos in this folder and remove the comment as you implement things. These
 developer comments will need to be removed before the pipeline
@@ -19,7 +19,7 @@ time in the future:
     - Commit your changes to git/github early and often to prevent accidental code loss.
     - Write tests as soon as possible and test often. When pushing changes to github
     all the tests in this repository will be run.
-    - In general, try to write modular, resusable code to save your future self (and
+    - In general, try to write modular, reuseable code to save your future self (and
     your team members) some time. Comments are particularly useful when they explain
     **why** something was done, as opposed to *how* it was done.
 
