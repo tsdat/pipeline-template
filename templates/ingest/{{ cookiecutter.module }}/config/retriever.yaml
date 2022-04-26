@@ -1,6 +1,6 @@
 classname: tsdat.io.retrievers.DefaultRetriever
 readers:
-  csv:
+  .*:
     classname: {% if cookiecutter.use_custom_data_reader == "no" %}tsdat.io.readers.CSVReader{%else %}pipelines.{{ cookiecutter.module }}.readers.CustomDataReader{% endif %}
 
 coords:

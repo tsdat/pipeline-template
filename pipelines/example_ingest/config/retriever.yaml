@@ -1,6 +1,6 @@
 classname: tsdat.io.retrievers.DefaultRetriever
 readers:
-  csv:
+  .*:
     classname: tsdat.io.readers.CSVReader
     parameters:
       read_csv_kwargs:
