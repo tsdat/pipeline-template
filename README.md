@@ -1,6 +1,6 @@
-# INGEST-TEMPLATE
+# Pipeline Template
 
-[![tests](https://github.com/tsdat/ingest-template/actions/workflows/tests.yml/badge.svg)](https://github.com/tsdat/ingest-template/actions/workflows/tests.yml)
+[![tests](https://github.com/tsdat/pipeline-template/actions/workflows/tests.yml/badge.svg)](https://github.com/tsdat/pipeline-template/actions/workflows/tests.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 This repository provides a way to group related `tsdat` pipelines so they can be more
@@ -30,7 +30,7 @@ mitigate common python packaging and path issues. See
 [this tutorial on WSL](https://tsdat.readthedocs.io/en/latest/tutorials/wsl.html) for
 how to set up a WSL environment and attach VS Code to it.
 
-1. Click '[Use this template](https://github.com/tsdat/ingest-template/generate)' and
+1. Click '[Use this template](https://github.com/tsdat/pipeline-template/generate)' and
 follow the steps to copy this into to your account.
     > If you are looking to get an older version of the template, you will need to
     select the box next to 'Include all branches' and set the branch your are interested
