@@ -2,6 +2,7 @@ import xarray as xr
 import matplotlib.pyplot as plt
 from tsdat import IngestPipeline, get_start_date_and_time_str, get_filename
 from utils import format_time_xticks
+from cmocean.cm import amp_r, dense, haline
 
 
 class ExamplePipeline(IngestPipeline):
@@ -12,7 +13,8 @@ class ExamplePipeline(IngestPipeline):
     ---------------------------------------------------------------------------------"""
 
     def hook_plot_dataset(self, dataset: xr.Dataset):
-        location = self.dataset_config.attrs.location_id
+        ds = dataset
+        loc = self.dataset_config.attrs.location_id
         datastream: str = self.dataset_config.attrs.datastream
 
         date, time = get_start_date_and_time_str(dataset)
@@ -22,10 +24,36 @@ class ExamplePipeline(IngestPipeline):
 
         with self.storage.uploadable_dir(datastream) as tmp_dir:
 
-            fig, ax = plt.subplots()
-            dataset["example_var"].plot(ax=ax, x="time")  # type: ignore
-            fig.suptitle(f"Example Variable at {location} on {date} {time}")
-            format_time_xticks(ax)
-            plot_file = get_filename(dataset, title="example_plot", extension="png")
+            fig, axs = plt.subplots(nrows=3)
+            fig.suptitle(f"Wave Statistics at {loc} on {date} {time}")
+
+            # Plot Wave Heights
+            c1, c2, c3 = amp_r(0.10), amp_r(0.50), amp_r(0.85)
+            ds.mean_wave_height.plot(ax=axs[0], c=c1, label=r"H$_{mean}$")
+            ds.significant_wave_height.plot(ax=axs[0], c=c2, label=r"H$_{sig}$")
+            ds.max_wave_height.plot(ax=axs[0], c=c3, label=r"H$_{max}$")
+            axs[0].legend(bbox_to_anchor=(1, -0.10), ncol=3)
+            axs[0].set_ylabel("Wave Height (m)")
+
+            # Plot Wave Periods
+            c1, c2, c3 = dense(0.15), dense(0.50), dense(0.8)
+            ds.mean_wave_period.plot(ax=axs[1], c=c1, label=r"T$_{mean}$")
+            ds.peak_wave_period.plot(ax=axs[1], c=c2, label=r"T$_{peak}$")
+            ds.max_wave_period.plot(ax=axs[1], c=c3, label=r"T$_{max}$")
+            axs[1].legend(bbox_to_anchor=(1, -0.10), ncol=3)
+            axs[1].set_ylabel("Wave Period (s)")
+
+            # Plot Wave Directions
+            c1, c2 = haline(0.15), haline(0.4)
+            ds.mean_wave_direction.plot(ax=axs[2], c=c1, label=r"$\theta_{mean}$")
+            ds.peak_wave_direction.plot(ax=axs[2], c=c2, label=r"$\theta_{peak}$")
+            axs[2].legend(bbox_to_anchor=(1, -0.10))
+            axs[2].set_ylabel("Wave Direction (deg)")
+
+            for i in range(3):
+                axs[i].set_xlabel("Time (UTC)")
+                format_time_xticks(axs[i])
+
+            plot_file = get_filename(ds, title="wave_data_plots", extension="png")
             fig.savefig(tmp_dir / plot_file)
             plt.close(fig)
