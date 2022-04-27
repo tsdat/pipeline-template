@@ -28,7 +28,7 @@
         "--exclude",
         "templates/**"
     ],
-    "python.analysis.typeCheckingMode": "strict",
+    "python.analysis.typeCheckingMode": "off",
     "python.testing.pytestEnabled": true,
     "python.testing.pytestArgs": [
         "test",
