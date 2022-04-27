@@ -67,8 +67,10 @@ manage dependencies in your development environment.
 4. Use a cookiecutter template to generate boilerplate pipeline code:
 
     ```bash
-    cookiecutter templates/ingest -o pipelines
+    make cookies
     ```
+
+    The `make cookies` command is a memorable shortcut for `cookiecutter templates/ingest -o pipelines`
 
     > Cookiecutter will show some text in the prompts, but more information on these
     prompts can be found in the [template README.md](templates/ingest/README.md)
