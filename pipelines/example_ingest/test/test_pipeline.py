@@ -11,8 +11,8 @@ def test_example_ingest_pipeline():
     test_file = (
         "pipelines/example_ingest/test/data/input/buoy.z06.00.20201201.000000.waves.csv"
     )
-    expected_file = "pipelines/example_ingest/test/data/expected/morro.buoy_z06-waves-20m.a1.20201201.000000.nc"
+    expected_file = "pipelines/example_ingest/test/data/expected/morro.buoy_z06-waves.a1.20201201.000000.nc"
 
     dataset = pipeline.run([test_file])
     expected: xr.Dataset = xr.open_dataset(expected_file)  # type: ignore
-    assert_close(dataset, expected, check_fill_value=False)
+    assert_close(dataset, expected, check_fill_value=False, check_attrs=False)
