@@ -58,18 +58,16 @@ class PipelineRegistry:
 
                 config = PipelineConfig.from_yaml(config_file)
                 pipeline = config.instantiate_pipeline()
-                inputs = input_keys if clump else input_key
+                inputs = input_keys if clump else [input_key]
                 logger.debug(
                     "Running pipeline %s on input %s",
                     pipeline.__repr_name__(),
                     inputs,
                 )
                 try:
+                    pipeline.run(inputs)
                     if clump:
-                        pipeline.run(inputs)
                         break
-                    else:
-                        pipeline.run(input_key)
                 except BaseException:
                     logger.exception(
                         "Pipeline '%s' failed to process input: %s",

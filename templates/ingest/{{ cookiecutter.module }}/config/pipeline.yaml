@@ -14,4 +14,4 @@ quality:
   path: pipelines/{{ cookiecutter.module }}/config/quality.yaml
 
 storage:
-  path: shared/config/storage.yaml
+  path: shared/storage.yaml
