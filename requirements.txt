@@ -1,4 +1,6 @@
-tsdat >=1.0.0, <1.1.0
+tsdat >=0.3.0, <0.4.0
 xarray[complete]
 act-atmos
 typer
+# additional required packages to run ingest pipelines
+cmocean  
