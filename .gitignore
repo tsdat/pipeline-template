@@ -12,6 +12,5 @@ typings/
 htmlcov/
 
 .ipynb_checkpoints/
-.vscode/
-=*
+
 
