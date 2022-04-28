@@ -7,8 +7,9 @@ typings/
 .coverage
 .mypy_cache
 .DS_Store
-.idea/
 .history/
 .pytest_cache/
 htmlcov/
 typings/
+.ipynb_checkpoints/
+.vscode/
