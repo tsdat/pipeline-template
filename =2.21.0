@@ -1,6 +1,0 @@
-Requirement already satisfied: eccodes in /home/kefei/anaconda3/envs/tsdat-0427/lib/python3.8/site-packages (1.4.1)
-Requirement already satisfied: findlibs in /home/kefei/anaconda3/envs/tsdat-0427/lib/python3.8/site-packages (from eccodes) (0.0.2)
-Requirement already satisfied: attrs in /home/kefei/anaconda3/envs/tsdat-0427/lib/python3.8/site-packages (from eccodes) (21.4.0)
-Requirement already satisfied: numpy in /home/kefei/anaconda3/envs/tsdat-0427/lib/python3.8/site-packages (from eccodes) (1.21.6)
-Requirement already satisfied: cffi in /home/kefei/anaconda3/envs/tsdat-0427/lib/python3.8/site-packages (from eccodes) (1.15.0)
-Requirement already satisfied: pycparser in /home/kefei/anaconda3/envs/tsdat-0427/lib/python3.8/site-packages (from cffi->eccodes) (2.21)
