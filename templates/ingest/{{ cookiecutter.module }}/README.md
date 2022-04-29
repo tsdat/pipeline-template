@@ -1,6 +1,6 @@
-# {{ cookiecutter.module }} Ingestion Pipeline
+# {{ cookiecutter.ingest_name }} Ingestion Pipeline
 
-The {{ cookiecutter.module }} ingestion pipeline was created from a cookiecutter template. This README file contains
+The {{ cookiecutter.ingest_name }} ingestion pipeline was created from a cookiecutter template. This README file contains
 instructions for running and testing your pipeline.
 
 ## Prerequisites
@@ -22,10 +22,7 @@ the template prompt.
 1. Make sure to be at your $REPOSITORY_ROOT. (i.e., where you cloned the pipeline-template repository)
 
 
-2. From a terminal, activate your conda environment.
-
-
-3. Run the runner.py with your test data input file as shown below:
+2. Run the runner.py with your test data input file as shown below:
 
 ```bash
 cd $REPOSITORY_ROOT
@@ -55,14 +52,14 @@ pytest
 ## Customizing your pipeline
 You will need to edit the configuration files and possibly additional python code (e.g., pipeline.py) to customize
 the template pipeline for your data.  To assist with customizing  your pipeline, this template comes embedded with
-pre-configured VS Code settings that will make editing/running/debuggging your pipeline much easier.  Therefore,
+pre-configured VS Code settings that will make editing/running/debugging your pipeline much easier.  Therefore,
 we highly recommend using the VS Code IDE to customize your pipeline.  However, advanced Python developers may also use any
 other IDE of choice (e.g., PyCharm).
 
 1. Use the `TODO-Tree` VS Code extension or use the search tool to find occurrences of
 "`# DEVELOPER:`". Each instance of this requires your attention. Attend to all the
 developer todos in this folder and remove the comment as you implement things. These
-developer comments will need to be removed before the pipeline
+developer comments will need to be removed before the pipeline is deployed.
 
 
 2. As you are developing, try to follow best practices to save yourself (and others)

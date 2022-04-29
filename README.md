@@ -64,7 +64,7 @@ follow the steps to copy the template repository into to your account.
 the folder where you checked out your pipeline repository:
 
     ```bash
-    conda env create --name tsdat-pipelines --file=conda-environment.yaml
+    conda env create --file=conda-environment.yaml
     conda activate tsdat-pipelines
     ```
 
