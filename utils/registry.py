@@ -26,10 +26,10 @@ class PipelineRegistry:
 
         Args:
             input_keys (List[str]]): A list of keys that the pipeline will process. Most
-            of the time these will be path(s) to files on the local file system.
+                of the time these will be path(s) to files on the local file system.
             clump (bool): A flag indicating if the dispatcher should use a single
-            pipeline to process the input keys. If True, the first key will be used to
-            determine the pipeline to run. Defaults to False.
+                pipeline to process the input keys. If True, the first key will be used to
+                determine the pipeline to run. Defaults to False.
 
         Returns:
             bool: True if the Pipeline ran without error, False otherwise.
@@ -79,9 +79,10 @@ class PipelineRegistry:
                     successes += 1
         
         logger.info(
-            "Processing completed with '%s' successes, '%s' failures, and %s skipped.",
+            "Processing completed with %s successes, %s failures, and %s skipped.",
             successes,
             failures,
+            skipped,
         )
 
     def _load(self, folder: Path = Path("pipelines")):
@@ -91,7 +92,7 @@ class PipelineRegistry:
 
         Args:
             folder (str, optional): The module (relative to the "ingest-awaken"
-            folder) under which individual ingests live. Defaults to "ingest".
+                folder) under which individual ingests live. Defaults to "ingest".
 
         -----------------------------------------------------------------------------"""
         config_paths = list(folder.glob("**/*pipeline*.yaml"))
@@ -109,11 +110,11 @@ class PipelineRegistry:
 
         Args:
             input_key (str): The input key (most commonly the path to a file to
-            process).
+                process).
 
         Returns:
             List[Path]: The pathes to the pipeline configuration files whose triggers
-            match the input key.
+                match the input key.
 
         -----------------------------------------------------------------------------"""
 
