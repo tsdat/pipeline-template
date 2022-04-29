@@ -79,7 +79,7 @@ class PipelineRegistry:
                     successes += 1
         
         logger.info(
-            "Processing completed with '%s' successes, '%s' failures, and %s skipped.",
+            "Processing completed with '%s' successes and '%s' failures.",
             successes,
             failures,
         )

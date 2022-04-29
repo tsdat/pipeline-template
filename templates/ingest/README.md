@@ -12,7 +12,7 @@ pip install cookiecutter
 
 Then run the following command from the top-level directory of the repository:
 ```
-cookiecutter templates/ingest -o ingest/
+cookiecutter templates/ingest -o pipelines/
 ```
 
 This will bring up a commandline interface which will go through some options. Consult

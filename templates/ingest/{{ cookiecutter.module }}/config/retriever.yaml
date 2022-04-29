@@ -1,8 +1,19 @@
 classname: tsdat.io.retrievers.DefaultRetriever
 readers:
   .*:
-    classname: {% if cookiecutter.use_custom_data_reader == "no" %}tsdat.io.readers.CSVReader{%else %}pipelines.{{ cookiecutter.module }}.readers.CustomDataReader{% endif %}
+    {% if cookiecutter.use_custom_data_reader == "no" -%}
+    classname: tsdat.io.readers.CSVReader
+    parameters:
+      read_csv_kwargs:
+        # This treats the first column (time) as a data variable, which helps for when
+        # the pandas DataFrame is converted to an xarray Dataset
+        index_col: false
 
+        # This tells pandas to look at row index 2 (0-based) for the header
+        header: 2
+    {% else -%}
+    classname: pipelines.{{ cookiecutter.module }}.readers.CustomDataReader
+    {% endif %}
 coords:
   # DEVELOPER: Specify the coords/data_vars that should be retrieved from any inputs
   time:

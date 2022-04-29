@@ -29,17 +29,28 @@ def run_pipeline(
         " results in one output data file being produced. Omit this option to run files"
         " independently and generally produce one output data file for each input file.",
     ),
+    verbose: bool = typer.Option(
+        False,
+        help="Turn logging level up to DEBUG."
+    ),
     # pipeline: str = typer.Option() # IDEA: Ability to run a specific ingest / folder
 ):
     """Main entry point to the ingest controller. This script takes a path to an input
     file, automatically determines which ingest(s) to use, and runs those ingests on the
     provided input data."""
 
+    # If in verbose mode, then turn up logging to DEBUG
+    if verbose:
+        logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.INFO)
+
     # Downstream code expects a list of strings
     files = [str(file) for file in filepaths]
     logger.debug(f"Found input files: {files}")
 
     # Run the pipeline on the input files
+    logger.debug("TEST ME")
     dispatcher = PipelineRegistry()
     dispatcher.dispatch(files, clump=clump)
 

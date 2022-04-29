@@ -17,6 +17,7 @@ def main():
 
     if "{{ cookiecutter.use_custom_qc }}" == "no":  # type: ignore
         os.remove(PROJECT_DIR / "qc.py")
+        os.remove(PROJECT_DIR / "config" / "quality.yaml")
 
     print("Formatting template code...")
 
