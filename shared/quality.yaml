@@ -23,11 +23,11 @@ managers:
       - COORDS
 
     #---------------------------------------------------------------
-  - name: Remove missing datapoints
+  - name: Remove missing data
     checker:
       classname: tsdat.qc.checkers.CheckMissing
     handlers:
-      - classname: tsdat.qc.handlers.ReplaceFailedValues
+      - classname: tsdat.qc.handlers.RemoveFailedValues
       - classname: tsdat.qc.handlers.RecordQualityResults
         parameters:
           bit: 1
@@ -36,7 +36,7 @@ managers:
     apply_to:
       - DATA_VARS
 
-  - name: Flag datapoints below minimum failure threshold
+  - name: Flag data below minimum failure threshold
     checker:
       classname: tsdat.qc.checkers.CheckFailMin
     handlers:
@@ -48,7 +48,7 @@ managers:
     apply_to:
       - DATA_VARS
 
-  - name: Flag datapoints above maximum failure threshold
+  - name: Flag data above maximum failure threshold
     checker:
       classname: tsdat.qc.checkers.CheckFailMax
     handlers:
@@ -60,7 +60,7 @@ managers:
     apply_to:
       - DATA_VARS
 
-  - name: Flag datapoints below minimum warning threshold
+  - name: Flag data below minimum warning threshold
     checker:
       classname: tsdat.qc.checkers.CheckWarnMin
     handlers:
@@ -72,7 +72,7 @@ managers:
     apply_to:
       - DATA_VARS
 
-  - name: Flag datapoints above maximum warning threshold
+  - name: Flag data above maximum warning threshold
     checker:
       classname: tsdat.qc.checkers.CheckWarnMax
     handlers:
