@@ -34,7 +34,7 @@ that there are no library dependency issues.  [Click here for more information o
 
     > **Windows Users** - You can install Anaconda directly to your Windows box OR you can run via a linux
     environment using the Windows Subsystem for Linux (WSL).  See
-    [this tutorial on WSL](https://tsdat.readthedocs.io/en/latest/tutorials/wsl.html) for
+    [this tutorial on WSL](https://tsdat.readthedocs.io/en/latest/tutorials/setup_wsl.html) for
     how to set up a WSL environment and attach VS Code to it.
 
 
