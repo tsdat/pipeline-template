@@ -98,13 +98,15 @@ VS Code that will make it much easier to get started quickly.)*
 
 1. Ensure your development environment is set up according to the instructions above
 
-2. Use a cookiecutter template to generate a new pipeline folder.  From your top level repository folder, run:
+2. Use a cookiecutter template to generate a new pipeline folder. From your top level
+repository folder run:
 
     ```bash
     make cookies
     ```
 
-    The `make cookies` command is a memorable shortcut for `cookiecutter templates/ingest -o pipelines`
+    The `make cookies` command is a memorable shortcut for `python templates/bake.py ingest`,
+    which itself is a wrapper around `cookiecutter templates/ingest -o pipelines`.
 
     > Cookiecutter will show some text in the prompts, but more information on these
     prompts can be found in the [template README.md](templates/ingest/README.md)
