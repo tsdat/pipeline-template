@@ -48,7 +48,7 @@ follow the steps to copy the template repository into to your account.
     in as your new default branch.
 
 2. On github click the 'Code' button to get a link to your code, then run 
-    ```bash
+    ```
     git clone <the link you copied>
     ```
     from the terminal on your computer where you would like to work on the code.
@@ -70,8 +70,8 @@ the folder where you checked out your pipeline repository:
 
     If you get the following warning message when running tsdat commands in your shell:
     ```bash
-     UserWarning: pyproj unable to set database path.
-   ```
+    UserWarning: pyproj unable to set database path.
+    ```
 
     Then run the following additional commands to permanently remove this warning message:
     ```bash
@@ -80,6 +80,7 @@ the folder where you checked out your pipeline repository:
     ```
 
 ## Opening your repository in VS Code
+
 1. Open the cloned repository in VS Code. *(This repository contains default settings for
 VS Code that will make it much easier to get started quickly.)*
 
@@ -88,7 +89,7 @@ VS Code that will make it much easier to get started quickly.)*
 3. Tell VS Code to use your new environment:
     - Press `F1` to bring up the command pane in VS Code
     - Type `Python: Select Interpreter` and select it.
-    - Select the newly-created `ingest` conda environment from the drop-down list.
+    - Select the newly-created `tsdat-pipelines` conda environment from the drop-down list.
         > You may need to refresh the list (cycle icon in the top right) to see it.
     - Bring up the command pane and type `Developer: Reload Window` to reload VS Code
     and ensure the settings changes propagate correctly.
@@ -103,16 +104,39 @@ VS Code that will make it much easier to get started quickly.)*
     ```bash
     make cookies
     ```
+    Cookiecutter will show some text in the prompts. More information on these prompts
+    can be found in the [template README.md](templates/ingest/README.md)
 
-    The `make cookies` command is a memorable shortcut for `cookiecutter templates/ingest -o pipelines`
+    > The `make cookies` command is a memorable shortcut for `cookiecutter templates/ingest -o pipelines`
 
-    > Cookiecutter will show some text in the prompts, but more information on these
-    prompts can be found in the [template README.md](templates/ingest/README.md)
 
-3. Once cookiecutter is done you will see your new pipeline folder appear inside `pipelines/`. Please see the README.md file inside 
-that folder for more information on how to configure, run, test, and debug your pipeline. 
+3. Once cookiecutter is done you will see your new pipeline folder appear inside
+`pipelines/`. Please see the README.md file inside that folder for more information on
+how to configure, run, test, and debug your pipeline. 
 
-**This repository supports adding as many pipelines as you want - just rinse and repeat the steps above.**
+> **This repository supports adding as many pipelines as you want - just rinse and repeat the steps above.**
+
+
+## Processing Data Files
+
+The `runner.py` script can be run from the command line to process input data files:
+```
+python runner.py <path(s) to file(s) to process>
+```
+
+The `runner.py` script can optionally take a glob pattern in addition to a filepath. E.g.,
+to process all 'csv' files in some input folder `data/to/process/` you would run:
+```
+python runner.py data/to/process/*.csv
+```
+
+> The pipeline(s) used to process the data will depend on the specific patterns declared
+by the `pipeline.yaml` files in each pipeline module in this repository.
+
+The `--help` option can be used to show additional usage information:
+```
+python runner.py --help
+```
 
 
 ## Additional resources
