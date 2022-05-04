@@ -25,7 +25,7 @@ The repository is made up of the following core pieces:
 
 ## Prerequisites
 
-The following are required to develop a tsdat pipeline:
+The following are required to develop a `tsdat` pipeline:
 1. **A GitHub account.** [Click here to create an account if you don't have one already](https://github.com/)
 
 
@@ -39,7 +39,7 @@ that there are no library dependency issues.  [Click here for more information o
 
 
 ## Creating a repository from the pipeline-template
-You can create a new repository based upon the tsdat pipeline-template repository in GitHub:
+You can create a new repository based upon the `tsdat` pipeline-template repository in GitHub:
 
 1. Click this '[Use this template](https://github.com/tsdat/pipeline-template/generate)' link and
 follow the steps to copy the template repository into to your account.
