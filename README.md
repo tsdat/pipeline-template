@@ -5,7 +5,7 @@
 
 This repository contains a collection of one or more `tsdat` pipelines (as found under the ``pipelines`` folder).  This
 enables related pipelines to be more easily maintained and run together.  New pipelines can be added easily via 
-the cookiecutter template mechanism described below.
+the template mechanism described below.
 
 ## Repository Structure
 
@@ -54,21 +54,24 @@ follow the steps to copy the template repository into to your account.
     from the terminal on your computer where you would like to work on the code.
 
 ## Setting up your Anaconda environment
-1. Open an appropriate terminal shell from your computer
-   1. If you are on Linux or Mac, just open a regular terminal
-   2. If you are on Windows, start your Anaconda prompt if you installed Anaconda directly to Windows, OR open a
-   WSL terminal if you installed Anaconda via WSL.
+1. Open a terminal shell from your computer
+   - If you are on Linux or Mac, just open a regular terminal
+   - If you are on Windows, start your Anaconda prompt if you installed Anaconda directly
+   to Windows, OR open a WSL terminal if you installed Anaconda via WSL.
 
-
-2. Run the following commands to create and activate your conda environment, where $REPOSITORY_ROOT represents
-the folder where you checked out your pipeline repository:
+2. Run the following commands to create and activate your conda environment:
 
     ```bash
     conda env create --file=conda-environment.yaml
     conda activate tsdat-pipelines
     ```
 
-    If you get the following warning message when running tsdat commands in your shell:
+3. Verify your environment is set up correctly by running the tests for this repository:
+    ```bash
+    pytest
+    ```
+
+    If you get the following warning message when running the test:
     ```bash
     UserWarning: pyproj unable to set database path.
     ```
@@ -79,6 +82,8 @@ the folder where you checked out your pipeline repository:
     pip install pyproj
     ```
 
+    If everything is set up correctly then all the tests should pass.
+
 ## Opening your repository in VS Code
 
 1. Open the cloned repository in VS Code. *(This repository contains default settings for
@@ -86,13 +91,19 @@ VS Code that will make it much easier to get started quickly.)*
 
 2. Install the recommended extensions (there should be a pop-up in VS Code with recommendations).
 
-3. Tell VS Code to use your new environment:
+3. Tell VS Code to use your new conda environment:
     - Press `F1` to bring up the command pane in VS Code
     - Type `Python: Select Interpreter` and select it.
     - Select the newly-created `tsdat-pipelines` conda environment from the drop-down list.
         > You may need to refresh the list (cycle icon in the top right) to see it.
     - Bring up the command pane and type `Developer: Reload Window` to reload VS Code
     and ensure the settings changes propagate correctly.
+
+4. Verify your VS Code environment is set up correctly by running the tests for this repository:
+    - Press `F1` to bring up the command pane in VS Code
+    - Type `Tests: Run All Tests` and select it
+    - A new window pane will show up on the left of VS Code showing test status
+    - Verify that all tests have passed (Green check marks)
 
 
 ## Adding a new pipeline
@@ -119,24 +130,24 @@ how to configure, run, test, and debug your pipeline.
 
 ## Processing Data Files
 
-The `runner.py` script can be run from the command line to process input data files:
-```
-python runner.py <path(s) to file(s) to process>
-```
+- The `runner.py` script can be run from the command line to process input data files:
+    ```
+    python runner.py <path(s) to file(s) to process>
+    ```
 
-The `runner.py` script can optionally take a glob pattern in addition to a filepath. E.g.,
+    > The pipeline(s) used to process the data will depend on the specific patterns declared
+    by the `pipeline.yaml` files in each pipeline module in this repository.
+
+- The `runner.py` script can optionally take a glob pattern in addition to a filepath. E.g.,
 to process all 'csv' files in some input folder `data/to/process/` you would run:
-```
-python runner.py data/to/process/*.csv
-```
+    ```
+    python runner.py data/to/process/*.csv
+    ```
 
-> The pipeline(s) used to process the data will depend on the specific patterns declared
-by the `pipeline.yaml` files in each pipeline module in this repository.
-
-The `--help` option can be used to show additional usage information:
-```
-python runner.py --help
-```
+- The `--help` option can be used to show additional usage information:
+    ```
+    python runner.py --help
+    ```
 
 
 ## Additional resources
