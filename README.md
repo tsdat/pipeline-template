@@ -106,6 +106,37 @@ VS Code that will make it much easier to get started quickly.)*
     - Verify that all tests have passed (Green check marks)
 
 
+## Processing Data
+
+- The `runner.py` script can be run from the command line to process input data files:
+    ```
+    python runner.py <path(s) to file(s) to process>
+    ```
+    > The pipeline(s) used to process the data will depend on the specific patterns declared
+    by the `pipeline.yaml` files in each pipeline module in this repository.
+
+- You can run the example pipeline that comes bundled with this repository by running:
+    ```
+    python runner.py pipelines/example_pipeline/test/data/input/buoy.z06.00.20201201.000000.waves.csv
+    ```
+
+    If goes successfully it should output some text, ending with the line:
+    ```
+    Processing completed with 1 successes, 0 failures, and 0 skipped.
+    ```
+
+
+- The `runner.py` script can optionally take a glob pattern in addition to a filepath. E.g.,
+to process all 'csv' files in some input folder `data/to/process/` you would run:
+    ```
+    python runner.py data/to/process/*.csv
+    ```
+
+- The `--help` option can be used to show additional usage information:
+    ```
+    python runner.py --help
+    ```
+
 ## Adding a new pipeline
 
 1. Ensure your development environment is set up according to the instructions above
@@ -126,28 +157,6 @@ VS Code that will make it much easier to get started quickly.)*
 how to configure, run, test, and debug your pipeline. 
 
 > **This repository supports adding as many pipelines as you want - just rinse and repeat the steps above.**
-
-
-## Processing Data Files
-
-- The `runner.py` script can be run from the command line to process input data files:
-    ```
-    python runner.py <path(s) to file(s) to process>
-    ```
-
-    > The pipeline(s) used to process the data will depend on the specific patterns declared
-    by the `pipeline.yaml` files in each pipeline module in this repository.
-
-- The `runner.py` script can optionally take a glob pattern in addition to a filepath. E.g.,
-to process all 'csv' files in some input folder `data/to/process/` you would run:
-    ```
-    python runner.py data/to/process/*.csv
-    ```
-
-- The `--help` option can be used to show additional usage information:
-    ```
-    python runner.py --help
-    ```
 
 
 ## Additional resources
