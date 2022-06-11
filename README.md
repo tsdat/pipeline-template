@@ -101,7 +101,7 @@ VS Code that will make it much easier to get started quickly.)*
 
 4. Verify your VS Code environment is set up correctly by running the tests for this repository:
     - Press `F1` to bring up the command pane in VS Code
-    - Type `Tests: Run All Tests` and select it
+    - Type `Test: Run All Tests` and select it
     - A new window pane will show up on the left of VS Code showing test status
     - Verify that all tests have passed (Green check marks)
 
