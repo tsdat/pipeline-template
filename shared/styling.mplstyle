@@ -6,8 +6,8 @@ font.family: serif
 font.size: 12
 axes.linewidth: 2
 
-legend.frameon: True
-legend.framealpha: 1
+legend.frameon: False
+legend.framealpha: 0
 legend.edgecolor: w
 
 xtick.top: True

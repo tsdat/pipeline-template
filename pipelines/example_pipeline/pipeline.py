@@ -47,7 +47,7 @@ class ExamplePipeline(IngestPipeline):
             c1, c2 = haline(0.15), haline(0.4)
             ds.mean_wave_direction.plot(ax=axs[2], c=c1, label=r"$\theta_{mean}$")
             ds.peak_wave_direction.plot(ax=axs[2], c=c2, label=r"$\theta_{peak}$")
-            axs[2].legend(bbox_to_anchor=(1, -0.10))
+            axs[2].legend(bbox_to_anchor=(1, -0.10), ncol=2)
             axs[2].set_ylabel("Wave Direction (deg)")
 
             for i in range(3):
