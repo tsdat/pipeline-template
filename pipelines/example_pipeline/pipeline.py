@@ -1,4 +1,5 @@
 import xarray as xr
+import act
 import matplotlib.pyplot as plt
 from tsdat import IngestPipeline, get_start_date_and_time_str, get_filename
 from utils import format_time_xticks
@@ -55,5 +56,21 @@ class ExamplePipeline(IngestPipeline):
                 format_time_xticks(axs[i])
 
             plot_file = get_filename(ds, title="wave_data_plots", extension="png")
+            fig.savefig(tmp_dir / plot_file)
+            plt.close(fig)
+
+            # Creat Plot Display
+            obj = ds
+            variable = "significant_wave_height"
+            display = act.plotting.TimeSeriesDisplay(
+                obj, figsize=(15, 10), subplot_shape=(2,)
+            )
+            # Plot data in top plot
+            display.plot(variable, subplot_index=(0,), label="Wave Height")
+            # Plot QC data
+            display.qc_flag_block_plot(variable, subplot_index=(1,))
+            fig = display.fig
+
+            plot_file = get_filename(ds, title="wave_height", extension="png")
             fig.savefig(tmp_dir / plot_file)
             plt.close(fig)
