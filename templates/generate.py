@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Any, Dict
 import typer
 from cookiecutter.main import cookiecutter
@@ -108,6 +109,9 @@ def ingest(
         output_dir="pipelines/",
         extra_context={**cookiedough},
     )
+
+    output_dir = Path("pipelines") / module
+    typer.echo(f"Created new ingest pipeline in {output_dir.as_posix()}")
 
 
 @app.callback()
