@@ -105,11 +105,8 @@ repository folder run:
     make cookies
     ```
 
-    The `make cookies` command is a memorable shortcut for `python templates/bake.py ingest`,
+    The `make cookies` command is a memorable shortcut for `python templates/generate.py ingest`,
     which itself is a wrapper around `cookiecutter templates/ingest -o pipelines`.
-
-    > Cookiecutter will show some text in the prompts, but more information on these
-    prompts can be found in the [template README.md](templates/ingest/README.md)
 
 3. Once cookiecutter is done you will see your new pipeline folder appear inside `pipelines/`. Please see the README.md file inside 
 that folder for more information on how to configure, run, test, and debug your pipeline. 
