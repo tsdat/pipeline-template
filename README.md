@@ -5,7 +5,7 @@
 
 This repository contains a collection of one or more `tsdat` pipelines (as found under the ``pipelines`` folder).  This
 enables related pipelines to be more easily maintained and run together.  New pipelines can be added easily via 
-the cookiecutter template mechanism described below.
+the template mechanism described below.
 
 ## Repository Structure
 
@@ -25,7 +25,7 @@ The repository is made up of the following core pieces:
 
 ## Prerequisites
 
-The following are required to develop a tsdat pipeline:
+The following are required to develop a `tsdat` pipeline:
 1. **A GitHub account.** [Click here to create an account if you don't have one already](https://github.com/)
 
 
@@ -34,12 +34,12 @@ that there are no library dependency issues.  [Click here for more information o
 
     > **Windows Users** - You can install Anaconda directly to your Windows box OR you can run via a linux
     environment using the Windows Subsystem for Linux (WSL).  See
-    [this tutorial on WSL](https://tsdat.readthedocs.io/en/latest/tutorials/wsl.html) for
+    [this tutorial on WSL](https://tsdat.readthedocs.io/en/latest/tutorials/setup_wsl.html) for
     how to set up a WSL environment and attach VS Code to it.
 
 
 ## Creating a repository from the pipeline-template
-You can create a new repository based upon the tsdat pipeline-template repository in GitHub:
+You can create a new repository based upon the `tsdat` pipeline-template repository in GitHub:
 
 1. Click this '[Use this template](https://github.com/tsdat/pipeline-template/generate)' link and
 follow the steps to copy the template repository into to your account.
@@ -48,30 +48,33 @@ follow the steps to copy the template repository into to your account.
     in as your new default branch.
 
 2. On github click the 'Code' button to get a link to your code, then run 
-    ```bash
+    ```
     git clone <the link you copied>
     ```
     from the terminal on your computer where you would like to work on the code.
 
 ## Setting up your Anaconda environment
-1. Open an appropriate terminal shell from your computer
-   1. If you are on Linux or Mac, just open a regular terminal
-   2. If you are on Windows, start your Anaconda prompt if you installed Anaconda directly to Windows, OR open a
-   WSL terminal if you installed Anaconda via WSL.
+1. Open a terminal shell from your computer
+   - If you are on Linux or Mac, just open a regular terminal
+   - If you are on Windows, start your Anaconda prompt if you installed Anaconda directly
+   to Windows, OR open a WSL terminal if you installed Anaconda via WSL.
 
-
-2. Run the following commands to create and activate your conda environment, where $REPOSITORY_ROOT represents
-the folder where you checked out your pipeline repository:
+2. Run the following commands to create and activate your conda environment:
 
     ```bash
     conda env create --file=conda-environment.yaml
     conda activate tsdat-pipelines
     ```
 
-    If you get the following warning message when running tsdat commands in your shell:
+3. Verify your environment is set up correctly by running the tests for this repository:
     ```bash
-     UserWarning: pyproj unable to set database path.
-   ```
+    pytest
+    ```
+
+    If you get the following warning message when running the test:
+    ```bash
+    UserWarning: pyproj unable to set database path.
+    ```
 
     Then run the following additional commands to permanently remove this warning message:
     ```bash
@@ -79,20 +82,60 @@ the folder where you checked out your pipeline repository:
     pip install pyproj
     ```
 
+    If everything is set up correctly then all the tests should pass.
+
 ## Opening your repository in VS Code
+
 1. Open the cloned repository in VS Code. *(This repository contains default settings for
 VS Code that will make it much easier to get started quickly.)*
 
 2. Install the recommended extensions (there should be a pop-up in VS Code with recommendations).
 
-3. Tell VS Code to use your new environment:
+3. Tell VS Code to use your new conda environment:
     - Press `F1` to bring up the command pane in VS Code
     - Type `Python: Select Interpreter` and select it.
-    - Select the newly-created `ingest` conda environment from the drop-down list.
+    - Select the newly-created `tsdat-pipelines` conda environment from the drop-down list.
         > You may need to refresh the list (cycle icon in the top right) to see it.
     - Bring up the command pane and type `Developer: Reload Window` to reload VS Code
     and ensure the settings changes propagate correctly.
 
+4. Verify your VS Code environment is set up correctly by running the tests for this repository:
+    - Press `F1` to bring up the command pane in VS Code
+    - Type `Test: Run All Tests` and select it
+    - A new window pane will show up on the left of VS Code showing test status
+    - Verify that all tests have passed (Green check marks)
+
+
+## Processing Data
+
+- The `runner.py` script can be run from the command line to process input data files:
+    ```
+    python runner.py <path(s) to file(s) to process>
+    ```
+    > The pipeline(s) used to process the data will depend on the specific patterns declared
+    by the `pipeline.yaml` files in each pipeline module in this repository.
+
+- You can run the example pipeline that comes bundled with this repository by running:
+    ```
+    python runner.py pipelines/example_pipeline/test/data/input/buoy.z06.00.20201201.000000.waves.csv
+    ```
+
+    If goes successfully it should output some text, ending with the line:
+    ```
+    Processing completed with 1 successes, 0 failures, and 0 skipped.
+    ```
+
+
+- The `runner.py` script can optionally take a glob pattern in addition to a filepath. E.g.,
+to process all 'csv' files in some input folder `data/to/process/` you would run:
+    ```
+    python runner.py data/to/process/*.csv
+    ```
+
+- The `--help` option can be used to show additional usage information:
+    ```
+    python runner.py --help
+    ```
 
 ## Adding a new pipeline
 
@@ -104,14 +147,17 @@ repository folder run:
     ```bash
     make cookies
     ```
+    Cookiecutter will show some text in the prompts. More information on these prompts
+    can be found in the [template README.md](templates/ingest/README.md)
 
-    The `make cookies` command is a memorable shortcut for `python templates/generate.py ingest`,
+    > The `make cookies` command is a memorable shortcut for `python templates/generate.py ingest`,
     which itself is a wrapper around `cookiecutter templates/ingest -o pipelines`.
 
-3. Once cookiecutter is done you will see your new pipeline folder appear inside `pipelines/`. Please see the README.md file inside 
-that folder for more information on how to configure, run, test, and debug your pipeline. 
+3. Once cookiecutter is done you will see your new pipeline folder appear inside
+`pipelines/`. Please see the README.md file inside that folder for more information on
+how to configure, run, test, and debug your pipeline. 
 
-**This repository supports adding as many pipelines as you want - just rinse and repeat the steps above.**
+> **This repository supports adding as many pipelines as you want - just rinse and repeat the steps above.**
 
 
 ## Additional resources

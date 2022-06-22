@@ -36,50 +36,26 @@ managers:
     apply_to:
       - DATA_VARS
 
-  - name: Flag data below minimum failure threshold
+  - name: Flag data below minimum valid threshold
     checker:
-      classname: tsdat.qc.checkers.CheckFailMin
+      classname: tsdat.qc.checkers.CheckValidMin
     handlers:
       - classname: tsdat.qc.handlers.RecordQualityResults
         parameters:
           bit: 2
           assessment: bad
-          meaning: "Value is less than the fail_range."
+          meaning: "Value is less than the valid_range."
     apply_to:
       - DATA_VARS
 
-  - name: Flag data above maximum failure threshold
+  - name: Flag data above maximum valid threshold
     checker:
-      classname: tsdat.qc.checkers.CheckFailMax
+      classname: tsdat.qc.checkers.CheckValidMax
     handlers:
       - classname: tsdat.qc.handlers.RecordQualityResults
         parameters:
           bit: 3
           assessment: bad
-          meaning: "Value is greater than the fail_range."
-    apply_to:
-      - DATA_VARS
-
-  - name: Flag data below minimum warning threshold
-    checker:
-      classname: tsdat.qc.checkers.CheckWarnMin
-    handlers:
-      - classname: tsdat.qc.handlers.RecordQualityResults
-        parameters:
-          bit: 4
-          assessment: indeterminate
-          meaning: "Value is less than the warn_range."
-    apply_to:
-      - DATA_VARS
-
-  - name: Flag data above maximum warning threshold
-    checker:
-      classname: tsdat.qc.checkers.CheckWarnMax
-    handlers:
-      - classname: tsdat.qc.handlers.RecordQualityResults
-        parameters:
-          bit: 5
-          assessment: indeterminate
-          meaning: "Value is greater than the warn_range."
+          meaning: "Value is greater than the valid_range."
     apply_to:
       - DATA_VARS

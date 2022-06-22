@@ -1,4 +1,5 @@
 import xarray as xr
+import act
 import matplotlib.pyplot as plt
 from tsdat import IngestPipeline, get_start_date_and_time_str, get_filename
 from utils import format_time_xticks
@@ -47,7 +48,7 @@ class ExamplePipeline(IngestPipeline):
             c1, c2 = haline(0.15), haline(0.4)
             ds.mean_wave_direction.plot(ax=axs[2], c=c1, label=r"$\theta_{mean}$")
             ds.peak_wave_direction.plot(ax=axs[2], c=c2, label=r"$\theta_{peak}$")
-            axs[2].legend(bbox_to_anchor=(1, -0.10))
+            axs[2].legend(bbox_to_anchor=(1, -0.10), ncol=2)
             axs[2].set_ylabel("Wave Direction (deg)")
 
             for i in range(3):
@@ -55,5 +56,21 @@ class ExamplePipeline(IngestPipeline):
                 format_time_xticks(axs[i])
 
             plot_file = get_filename(ds, title="wave_data_plots", extension="png")
+            fig.savefig(tmp_dir / plot_file)
+            plt.close(fig)
+
+            # Creat Plot Display
+            obj = ds
+            variable = "significant_wave_height"
+            display = act.plotting.TimeSeriesDisplay(
+                obj, figsize=(15, 10), subplot_shape=(2,)
+            )
+            # Plot data in top plot
+            display.plot(variable, subplot_index=(0,), label="Wave Height")
+            # Plot QC data
+            display.qc_flag_block_plot(variable, subplot_index=(1,))
+            fig = display.fig
+
+            plot_file = get_filename(ds, title="wave_height", extension="png")
             fig.savefig(tmp_dir / plot_file)
             plt.close(fig)
