@@ -25,9 +25,9 @@ def test_generate_ingest_pipeline():
             "PNNL",
             "--ingest-description",
             "Testing typer wrapper over cookiecutter ingest pipeline template.",
-            "--use-custom-data-reader",
-            "--use-custom-data-converter",
-            "--use-custom-qc",
+            "--no-use-custom-data-reader",
+            "--no-use-custom-data-converter",
+            "--no-use-custom-qc",
         ],
         input="\n".join(
             [

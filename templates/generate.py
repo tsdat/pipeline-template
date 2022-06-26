@@ -1,11 +1,17 @@
+from __future__ import annotations
+
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Literal
 import typer
 from cookiecutter.main import cookiecutter
 from slugify import slugify  # type: ignore
 
 
 app = typer.Typer(add_completion=False)
+
+
+def _to_cookiecutter_bool(value: bool) -> Literal["yes", "no"]:
+    return "yes" if value else "no"
 
 
 @app.command()
@@ -90,9 +96,9 @@ def ingest(
         "ingest_name": ingest_name,
         "ingest_location": ingest_location,
         "ingest_description": ingest_description,
-        "use_custom_data_reader": use_custom_data_reader,
-        "use_custom_data_converter": use_custom_data_converter,
-        "use_custom_qc": use_custom_qc,
+        "use_custom_data_reader": _to_cookiecutter_bool(use_custom_data_reader),
+        "use_custom_data_converter": _to_cookiecutter_bool(use_custom_data_converter),
+        "use_custom_qc": _to_cookiecutter_bool(use_custom_qc),
         "module": module,
         "classname": classname,
         "location_id": location_id,
