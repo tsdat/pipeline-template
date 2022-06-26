@@ -31,7 +31,9 @@ def test_generate_ingest_pipeline():
         ],
         input="\n".join(
             [
-                "y",  # Okay to module name
+                "n",  # Rename module name
+                "Bad Module",  # Won't pass validation check
+                "ingest_testing",  # Rename back to default
                 "y",  # Okay to classname
                 "y",  # Okay to location id
             ]
@@ -39,6 +41,7 @@ def test_generate_ingest_pipeline():
     )
 
     assert result.exit_code == 0
+    assert "'Bad Module' is not a valid python module name" in result.output
     assert output_dir.is_dir()
 
     # Run pytest on the output dir

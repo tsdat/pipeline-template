@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import re
 from pathlib import Path
-from typing import Any, Dict, Literal
+from typing import Any, Callable, Dict, Literal
 import typer
 from cookiecutter.main import cookiecutter
 from slugify import slugify  # type: ignore
@@ -12,6 +13,35 @@ app = typer.Typer(add_completion=False)
 
 def _to_cookiecutter_bool(value: bool) -> Literal["yes", "no"]:
     return "yes" if value else "no"
+
+
+def validated_prompt(text: str, validator: Callable[[Any], bool], **kwargs: Any) -> Any:
+    value = typer.prompt(text, **kwargs)
+    while not validator(value):
+        value = typer.prompt(text, **kwargs)
+    return value
+
+
+def valid_module(module: str) -> bool:
+    is_valid = bool(re.match(r"^[a-zA-Z][a-zA-Z0-9_]+$", module))
+    if not is_valid:
+        typer.echo(
+            f"'{module}' is not a valid python module name. Module names must only"
+            " contain alphanumeric and '_' characters and should start with a letter."
+            " Using lowercase with words separated by '_' is considered best practice."
+        )
+    return is_valid
+
+
+def valid_classname(classname: str) -> bool:
+    is_valid = bool(re.match(r"^[A-Z][a-zA-Z0-9_]+$", classname))
+    if not is_valid:
+        typer.echo(
+            f"'{classname}' is not a valid python class name. Class names must only"
+            " contain alphanumeric and '_' characters and should start with a capital"
+            " letter. Using CamelCase is considered best practice."
+        )
+    return is_valid
 
 
 @app.command()
@@ -76,15 +106,17 @@ def ingest(
         " this OK?\n",
         default=True,
     ):
-        module = typer.prompt("What would you like to rename the module to?\n")
+        module = validated_prompt(
+            "What would you like to rename the module to?\n", valid_module
+        )
 
     if not typer.confirm(
         f"'{classname}' will be the name of your IngestPipeline class (the python class"
         " containing your custom python code hooks). Is this OK?\n",
         default=True,
     ):
-        classname = typer.prompt(
-            "What would you like to rename the pipeline class to?\n"
+        classname = validated_prompt(
+            "What would you like to rename the pipeline class to?\n", valid_classname
         )
 
     if not typer.confirm(
