@@ -19,7 +19,7 @@ def test_generate_ingest_pipeline():
         app,
         [
             "ingest",
-            "--ingest-name",
+            "--ingest-title",
             "Ingest Testing",
             "--ingest-location",
             "PNNL",

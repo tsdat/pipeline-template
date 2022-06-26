@@ -16,15 +16,19 @@ def _to_cookiecutter_bool(value: bool) -> Literal["yes", "no"]:
 
 @app.command()
 def ingest(
-    ingest_name: str = typer.Option(
+    ingest_title: str = typer.Option(
         ...,
-        help="A name to give the ingest. This will be used as a title in the ingest's"
-        " README file and in the metadata produced by the pipeline.",
-        prompt="What name do you want to give this ingest?\n",
+        help="The title of the ingest excluding any location details. This will be used"
+        " to generate a default pipeline class name and the folder in which it lives."
+        " E.g., for a title of 'Halo Lidar', 'HaloLidar' would be the default name of"
+        " the pipeline and 'pipelines/halo_lidar' would be the folder created to"
+        " contain its code. Note that a later prompt will appear to confirm or modify"
+        " these defaults.",
+        prompt="What title do you want to give this ingest?\n",
     ),
     ingest_location: str = typer.Option(
         ...,
-        help="A label for the location where the data are measured.",
+        help="A label for the location where the data are collected.",
         prompt="What label should be used for the location of the ingest? (E.g., PNNL,"
         " San Francisco, etc.)\n",
     ),
@@ -63,7 +67,7 @@ def ingest(
 ):
     """Ingest cookiecutter wrapper that adds validation and better dynamic defaults."""
 
-    module = slugify(ingest_name, separator="_")
+    module = slugify(ingest_title, separator="_")
     classname = module.replace("_", " ").title().replace(" ", "")
     location_id = slugify(ingest_location, separator="_")
 
@@ -93,7 +97,7 @@ def ingest(
         )
 
     cookiedough: Dict[str, Any] = {
-        "ingest_name": ingest_name,
+        "ingest_name": ingest_title,
         "ingest_location": ingest_location,
         "ingest_description": ingest_description,
         "use_custom_data_reader": _to_cookiecutter_bool(use_custom_data_reader),
