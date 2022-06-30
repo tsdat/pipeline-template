@@ -139,24 +139,25 @@ to process all 'csv' files in some input folder `data/to/process/` you would run
 
 ## Adding a new pipeline
 
-1. Ensure your development environment is set up according to the instructions above
-
-2. Use a cookiecutter template to generate a new pipeline folder.  From your top level repository folder, run:
+1. Use a cookiecutter template to generate a new pipeline folder. From your top level
+repository folder run:
 
     ```bash
     make cookies
     ```
-    Cookiecutter will show some text in the prompts. More information on these prompts
-    can be found in the [template README.md](templates/ingest/README.md)
 
-    > The `make cookies` command is a memorable shortcut for `cookiecutter templates/ingest -o pipelines`
+    Follow the prompts that appear to generate a new ingestion pipeline. After completing all the
+    prompts cookiecutter will run and your new pipeline code will appear inside the
+    `pipelines/<module_name>` folder.
 
+    > The `make cookies` command is a memorable shortcut for `python templates/generate.py ingest`,
+    which itself is a wrapper around `cookiecutter templates/ingest -o pipelines`. To see more
+    information about the options available for this command run `python templates/generate.py --help`.    
 
-3. Once cookiecutter is done you will see your new pipeline folder appear inside
-`pipelines/`. Please see the README.md file inside that folder for more information on
-how to configure, run, test, and debug your pipeline. 
+2.  See the README.md file inside that folder for more information on how to configure, run,
+test, and debug your pipeline.
 
-> **This repository supports adding as many pipelines as you want - just rinse and repeat the steps above.**
+> This repository supports adding as many pipelines as you want - just repeat the steps above.
 
 
 ## Additional resources
