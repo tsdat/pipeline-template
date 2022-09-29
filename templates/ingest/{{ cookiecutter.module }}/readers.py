@@ -33,4 +33,5 @@ class CustomDataReader(DataReader):
         # DEVELOPER: Implement the read method. This takes an input_key which is the path
         # to the file being run. It should open the file and return either a single
         # Dataset object, or a mapping of strings to Datasets.
+        raise NotImplementedError
         return xr.Dataset()
