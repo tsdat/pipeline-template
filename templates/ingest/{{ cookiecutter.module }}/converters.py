@@ -6,11 +6,11 @@ dataset.yaml definition.
 -------------------------------------------------------------------------------------"""
 
 import xarray as xr
+from typing import Any, Optional
 
-from typing import Any
 from pydantic import BaseModel, Extra
-from tsdat.io.base import DataConverter
-from tsdat.config.dataset import DatasetConfig
+from tsdat import DataConverter, DatasetConfig, RetrievedDataset
+
 
 # DEVELOPER: Implement your custom DataConverter, giving it a better name and
 # documentation as you do so.
@@ -40,11 +40,25 @@ class CustomDataConverter(DataConverter):
 
     def convert(
         self,
-        dataset: xr.Dataset,
-        dataset_config: DatasetConfig,
+        data: xr.DataArray,
         variable_name: str,
+        dataset_config: DatasetConfig,
+        retrieved_dataset: RetrievedDataset,
         **kwargs: Any,
-    ) -> xr.Dataset:
-        # Add your data conversion logic here
+    ) -> Optional[xr.DataArray]:
+        """----------------------------------------------------------------------------
+        Applies a custom conversion to the retrieved data.
+
+        Args:
+            data (xr.DataArray): The DataArray corresponding with the retrieved data
+                variable to convert.
+            variable_name (str): The name of the variable to convert.
+            dataset_config (DatasetConfig): The output dataset configuration.
+            retrieved_dataset (RetrievedDataset): The retrieved dataset structure.
+
+        Returns:
+            Optional[xr.DataArray]: The converted data as an xr.DataArray, or None if
+                the conversion was done in place.
+
+        ----------------------------------------------------------------------------"""
         raise NotImplementedError
-        return dataset

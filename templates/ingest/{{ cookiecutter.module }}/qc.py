@@ -35,7 +35,7 @@ class CustomQualityChecker(QualityChecker):
         # True values in the failures array indicate a quality problem.
         var_data = dataset[variable_name]
         failures: NDArray[np.bool8] = np.zeros_like(var_data, dtype=np.bool8)  # type: ignore
-
+        raise NotImplementedError
         return failures
 
 
@@ -68,5 +68,5 @@ class CustomQualityHandler(QualityHandler):
     def run(
         self, dataset: xr.Dataset, variable_name: str, failures: NDArray[np.bool8]
     ) -> xr.Dataset:
-
+        raise NotImplementedError
         return dataset
