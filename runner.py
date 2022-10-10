@@ -25,9 +25,16 @@ def run_pipeline(
     ),
     clump: bool = typer.Option(
         False,
-        help="Clump all the files together to be run by a single ingest. This typically"
-        " results in one output data file being produced. Omit this option to run files"
-        " independently and generally produce one output data file for each input file.",
+        help="A flag indicating if the dispatcher should use a single pipeline to "
+        "process the input keys. This typically results in one output data file being "
+        "produced. Omit this option to run files independently and generally produce one"
+        " output data file for each input file.",
+    ),
+    multidispatch: bool = typer.Option(
+        False,
+        help="A flag indicating if the dispatcher is allowed to use multiple pipelines "
+        "to process each input key. If True, any pipeline whose regex pattern matches an "
+        "input key will be used to process the input key.",
     ),
     verbose: bool = typer.Option(False, help="Turn logging level up to DEBUG."),
     # pipeline: str = typer.Option() # IDEA: Ability to run a specific ingest / folder
@@ -48,7 +55,7 @@ def run_pipeline(
 
     # Run the pipeline on the input files
     dispatcher = PipelineRegistry()
-    dispatcher.dispatch(files, clump=clump)
+    dispatcher.dispatch(files, clump=clump, multidispatch=multidispatch)
 
 
 if __name__ == "__main__":

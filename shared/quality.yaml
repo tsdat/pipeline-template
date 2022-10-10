@@ -44,7 +44,7 @@ managers:
         parameters:
           bit: 2
           assessment: bad
-          meaning: "Value is less than the valid_range."
+          meaning: "Value is less than the valid_min."
     apply_to:
       - DATA_VARS
 
@@ -56,6 +56,6 @@ managers:
         parameters:
           bit: 3
           assessment: bad
-          meaning: "Value is greater than the valid_range."
+          meaning: "Value is greater than the valid_max."
     apply_to:
       - DATA_VARS
