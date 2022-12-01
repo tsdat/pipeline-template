@@ -55,8 +55,8 @@ follow the steps to copy the template repository into to your account.
 
 ## Setting up your Anaconda environment
 1. Open a terminal shell from your computer
-   - If you are on Linux or Mac, just open a regular terminal
-   - If you are on Windows, start your Anaconda prompt if you installed Anaconda directly
+   - Linux or Mac: open a regular terminal
+   - Windows: open an Anaconda prompt if you installed Anaconda directly
    to Windows, OR open a WSL terminal if you installed Anaconda via WSL.
 
 2. Run the following commands to create and activate your conda environment:
@@ -90,6 +90,24 @@ follow the steps to copy the template repository into to your account.
 VS Code that will make it much easier to get started quickly.)*
 
 2. Install the recommended extensions (there should be a pop-up in VS Code with recommendations).
+
+    **Windows Users**:
+    In order to run python scripts in VSCode, follow steps A-C below:
+
+    A. Install the extension Code Runner (authored by Jun Han).
+
+    B. Press `F1`, type `Preferences: Open User Settings (JSON)` and select it.
+
+    C. Add the following lines to the list of user settings, and update `<path to anaconda>` for
+    your machine:
+    ```bash
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "python.condaPath": "C:/<path to anaconda>/Anaconda3/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "code-runner.executorMap": {
+        "python": "C:/<path to anaconda>/Anaconda3/Scripts/activate.bat && $pythonPath $fullFileName"
+    },
+    ```
 
 3. Tell VS Code to use your new conda environment:
     - Press `F1` to bring up the command pane in VS Code
