@@ -49,3 +49,4 @@ def test_generate_ingest_pipeline():
     assert exit_code.name == "OK"
 
     shutil.rmtree(output_dir)
+    shutil.rmtree("storage/root/data/pnnl.ingest_testing.a1")
