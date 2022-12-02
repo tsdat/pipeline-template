@@ -53,7 +53,7 @@ class PipelineRegistry:
                         f" Found matches: {config_files}"
                     )
             elif not len(config_files):
-                logger.warn(
+                logger.warning(
                     "No pipeline configuration found matching input key '%s'", input_key
                 )
                 skipped += 1
@@ -69,6 +69,7 @@ class PipelineRegistry:
                     )
                     try:
                         pipeline.run(inputs)
+                        successes += 1
                         if clump:
                             break
                     except BaseException:
@@ -78,8 +79,6 @@ class PipelineRegistry:
                             inputs,
                         )
                         failures += 1
-                    else:
-                        successes += 1
         
         logger.info(
             "Processing completed with %s successes, %s failures, and %s skipped.",
@@ -87,6 +86,7 @@ class PipelineRegistry:
             failures,
             skipped,
         )
+        return successes, failures, skipped
 
     def _load(self, folder: Path = Path("pipelines")):
         """-----------------------------------------------------------------------------
