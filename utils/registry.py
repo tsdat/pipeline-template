@@ -70,6 +70,7 @@ class PipelineRegistry:
                     try:
                         pipeline.run(inputs)
                         if clump:
+                            successes += 1
                             break
                     except BaseException:
                         logger.exception(
