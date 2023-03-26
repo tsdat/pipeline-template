@@ -4,10 +4,8 @@ from pathlib import Path
 
 from runner import app
 
-runner = CliRunner()
 
-
-def test_multidispatch():
+def test_ingest_multidispatch():
     # Don't run test if example_pipeline is deleted
     ex_pipeline = Path("pipelines/example_pipeline")
 
@@ -16,7 +14,7 @@ def test_multidispatch():
         input_key = (
             ex_pipeline / "test/data/input/buoy.z06.00.20201201.000000.waves.csv"
         ).as_posix()
-        result = runner.invoke(app, ["--multidispatch", input_key])
+        result = CliRunner().invoke(app, ["ingest", "--multidispatch", input_key])
 
         # assert pipeline runs successfully
         assert result.exit_code == 0

@@ -26,8 +26,8 @@ The repository is made up of the following core pieces:
 ## Prerequisites
 
 The following are required to develop a `tsdat` pipeline:
-1. **A GitHub account.** [Click here to create an account if you don't have one already](https://github.com/)
 
+1. **A GitHub account.** [Click here to create an account if you don't have one already](https://github.com/)
 
 2. **An Anaconda environment.**  We strongly recommend developing in an Anaconda Python environment to ensure
 that there are no library dependency issues.  [Click here for more information on installing Anaconda on your computer](https://docs.anaconda.com/anaconda/install/index.html)
@@ -37,8 +37,8 @@ that there are no library dependency issues.  [Click here for more information o
     [this tutorial on WSL](https://tsdat.readthedocs.io/en/latest/tutorials/setup_wsl.html) for
     how to set up a WSL environment and attach VS Code to it.
 
-
 ## Creating a repository from the pipeline-template
+
 You can create a new repository based upon the `tsdat` pipeline-template repository in GitHub:
 
 1. Click this '[Use this template](https://github.com/tsdat/pipeline-template/generate)' link and
@@ -47,13 +47,16 @@ follow the steps to copy the template repository into to your account.
     select the box next to 'Include all branches' and set the branch your are interested
     in as your new default branch.
 
-2. On github click the 'Code' button to get a link to your code, then run 
-    ```
+2. On github click the 'Code' button to get a link to your code, then run
+
+    ```shell
     git clone <the link you copied>
     ```
+
     from the terminal on your computer where you would like to work on the code.
 
 ## Setting up your Anaconda environment
+
 1. Open a terminal shell from your computer
    - Linux or Mac: open a regular terminal
    - Windows: open an Anaconda prompt if you installed Anaconda directly
@@ -61,23 +64,26 @@ follow the steps to copy the template repository into to your account.
 
 2. Run the following commands to create and activate your conda environment:
 
-    ```bash
+    ```shell
     conda env create --file=conda-environment.yaml
     conda activate tsdat-pipelines
     ```
 
 3. Verify your environment is set up correctly by running the tests for this repository:
-    ```bash
+
+    ```shell
     pytest
     ```
 
     If you get the following warning message when running the test:
-    ```bash
+
+    ```shell
     UserWarning: pyproj unable to set database path.
     ```
 
     Then run the following additional commands to permanently remove this warning message:
-    ```bash
+
+    ```shell
     conda remove --force pyproj
     pip install pyproj
     ```
@@ -91,8 +97,7 @@ VS Code that will make it much easier to get started quickly.)*
 
 2. Install the recommended extensions (there should be a pop-up in VS Code with recommendations).
 
-    **Windows Users**:
-    In order to run python scripts in VSCode, follow steps A-C below:
+    > **Windows Users**: In order to run python scripts in VSCode, follow steps A-C below:
 
     A. Install the extension Code Runner (authored by Jun Han).
 
@@ -100,20 +105,22 @@ VS Code that will make it much easier to get started quickly.)*
 
     C. Add the following lines to the list of user settings, and update `<path to anaconda>` for
     your machine:
-    ```bash
-    "terminal.integrated.defaultProfile.windows": "Command Prompt",
-    "python.condaPath": "C:/<path to anaconda>/Anaconda3/python.exe",
-    "python.terminal.activateEnvironment": true,
-    "code-runner.executorMap": {
-        "python": "C:/<path to anaconda>/Anaconda3/Scripts/activate.bat && $pythonPath $fullFileName"
-    },
+
+    ```json
+    {
+        "terminal.integrated.defaultProfile.windows": "Command Prompt",
+        "python.condaPath": "C:/<path to anaconda>/Anaconda3/python.exe",
+        "python.terminal.activateEnvironment": true,
+        "code-runner.executorMap": {
+            "python": "C:/<path to anaconda>/Anaconda3/Scripts/activate.bat && $pythonPath $fullFileName"
+        },
+    }
     ```
 
 3. Tell VS Code to use your new conda environment:
     - Press `F1` to bring up the command pane in VS Code
     - Type `Python: Select Interpreter` and select it.
-    - Select the newly-created `tsdat-pipelines` conda environment from the drop-down list.
-        > You may need to refresh the list (cycle icon in the top right) to see it.
+    - Select the newly-created `tsdat-pipelines` conda environment from the drop-down list. You may need to refresh the list (cycle icon in the top right) to see it.
     - Bring up the command pane and type `Developer: Reload Window` to reload VS Code
     and ensure the settings changes propagate correctly.
 
@@ -123,35 +130,39 @@ VS Code that will make it much easier to get started quickly.)*
     - A new window pane will show up on the left of VS Code showing test status
     - Verify that all tests have passed (Green check marks)
 
-
 ## Processing Data
 
 - The `runner.py` script can be run from the command line to process input data files:
-    ```
+
+    ```shell
     python runner.py <path(s) to file(s) to process>
-    ```
+
+    ```shell
     > The pipeline(s) used to process the data will depend on the specific patterns declared
     by the `pipeline.yaml` files in each pipeline module in this repository.
 
 - You can run the example pipeline that comes bundled with this repository by running:
-    ```
+
+    ```shell
     python runner.py pipelines/example_pipeline/test/data/input/buoy.z06.00.20201201.000000.waves.csv
     ```
 
     If goes successfully it should output some text, ending with the line:
-    ```
+
+    ```shell
     Processing completed with 1 successes, 0 failures, and 0 skipped.
     ```
 
-
 - The `runner.py` script can optionally take a glob pattern in addition to a filepath. E.g.,
 to process all 'csv' files in some input folder `data/to/process/` you would run:
-    ```
+
+    ```shell
     python runner.py data/to/process/*.csv
     ```
 
 - The `--help` option can be used to show additional usage information:
-    ```
+
+    ```shell
     python runner.py --help
     ```
 
@@ -170,29 +181,28 @@ repository folder run:
 
     > The `make cookies` command is a memorable shortcut for `python templates/generate.py ingest`,
     which itself is a wrapper around `cookiecutter templates/ingest -o pipelines`. To see more
-    information about the options available for this command run `python templates/generate.py --help`.    
+    information about the options available for this command run `python templates/generate.py --help`.
 
-2.  See the README.md file inside that folder for more information on how to configure, run,
+2. See the README.md file inside that folder for more information on how to configure, run,
 test, and debug your pipeline.
 
 > This repository supports adding as many pipelines as you want - just repeat the steps above.
 
-
 ## Additional resources
 
 - Learn more about `tsdat`:
-    - GitHub: https://github.com/tsdat/tsdat
-    - Documentation: https://tsdat.readthedocs.io
-    - Data standards: https://github.com/tsdat/data_standards
-- Learn more about `xarray`: 
-    - GitHub: https://github.com/pydata/xarray
-    - Documentation: https://xarray.pydata.org
+  - GitHub: https://github.com/tsdat/tsdat
+  - Documentation: https://tsdat.readthedocs.io
+  - Data standards: https://github.com/tsdat/data_standards
+- Learn more about `xarray`:
+  - GitHub: https://github.com/pydata/xarray
+  - Documentation: https://xarray.pydata.org
 - Learn more about 'pydantic':
-    - GitHub: https://github.com/samuelcolvin/pydantic/
-    - Documentation: https://pydantic-docs.helpmanual.io
+  - GitHub: https://github.com/samuelcolvin/pydantic/
+  - Documentation: https://pydantic-docs.helpmanual.io
 - Other useful tools:
-    - VS Code: https://code.visualstudio.com/docs
-    - Docker: https://docs.docker.com/get-started/
-    - `pytest`: https://github.com/pytest-dev/pytest
-    - `black`: https://github.com/psf/black
-    - `matplotlib` guide: https://realpython.com/python-matplotlib-guide/
+  - VS Code: https://code.visualstudio.com/docs
+  - Docker: https://docs.docker.com/get-started/
+  - `pytest`: https://github.com/pytest-dev/pytest
+  - `black`: https://github.com/psf/black
+  - `matplotlib` guide: https://realpython.com/python-matplotlib-guide/

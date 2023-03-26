@@ -1,0 +1,20 @@
+classname: pipelines.{{ cookiecutter.module }}.pipeline.{{ cookiecutter.classname }}
+
+triggers: []
+
+retriever:
+  path: pipelines/{{ cookiecutter.module }}/config/retriever.yaml
+
+dataset:
+  path: pipelines/{{ cookiecutter.module }}/config/dataset.yaml
+
+{% if cookiecutter.use_custom_qc == "no" -%}
+quality:
+  path: shared/quality.yaml
+{% else -%}
+quality:
+  path: pipelines/{{ cookiecutter.module }}/config/quality.yaml
+{% endif -%}
+
+storage:
+  path: shared/storage.yaml

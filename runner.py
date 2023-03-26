@@ -13,7 +13,7 @@ app = typer.Typer(add_completion=False)
 
 
 @app.command()
-def run_pipeline(
+def ingest(
     filepaths: List[Path] = typer.Argument(
         ...,
         exists=True,
@@ -56,6 +56,24 @@ def run_pipeline(
     # Run the pipeline on the input files
     dispatcher = PipelineRegistry()
     dispatcher.dispatch(files, clump=clump, multidispatch=multidispatch)
+
+
+# TODO
+@app.command()
+def vap(
+    pipeline: Path = typer.Argument(
+        ...,
+        exists=True,
+        dir_okay=False,
+        help="The path to the vap / transform pipeline config file to use",
+    ),
+    start: str = typer.Option(..., help="Start date in 'YYYYMMDD.hhmmss' format"),
+    end: str = typer.Option(..., help="End date in 'YYYYMMDD.hhmmss' format"),
+):
+    # TODO:Complete this
+    # TODO: Merge this into main tsdat repo
+
+    ...
 
 
 if __name__ == "__main__":
