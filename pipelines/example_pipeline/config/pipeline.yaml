@@ -1,7 +1,7 @@
 classname: pipelines.example_pipeline.pipeline.ExamplePipeline
 
 triggers:
-  - .*example_pipeline.*\.csv
+  - .*z06.*\.csv
 
 retriever:
   path: pipelines/example_pipeline/config/retriever.yaml

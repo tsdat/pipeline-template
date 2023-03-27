@@ -23,7 +23,7 @@ def test_ingest_multidispatch():
         path = Path("storage/root")
         storage_dir = ["data", "ancillary"]
         file_dir = [
-            "humboldt.buoy_z05-waves.a1",
+            # "humboldt.buoy_z05-waves.a1",
             "morro.buoy_z06-waves.a1",
         ]
         for folder in storage_dir:
