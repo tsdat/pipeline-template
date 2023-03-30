@@ -1,6 +1,7 @@
 import logging
 from pathlib import Path
 from typing import List
+from tsdat import PipelineConfig, TransformationPipeline
 
 import typer
 
@@ -58,10 +59,9 @@ def ingest(
     dispatcher.dispatch(files, clump=clump, multidispatch=multidispatch)
 
 
-# TODO
 @app.command()
 def vap(
-    pipeline: Path = typer.Argument(
+    config_path: Path = typer.Argument(
         ...,
         exists=True,
         dir_okay=False,
@@ -69,11 +69,37 @@ def vap(
     ),
     start: str = typer.Option(..., help="Start date in 'YYYYMMDD.hhmmss' format"),
     end: str = typer.Option(..., help="End date in 'YYYYMMDD.hhmmss' format"),
+    verbose: bool = typer.Option(False, help="Turn logging level up to DEBUG."),
 ):
-    # TODO:Complete this
-    # TODO: Merge this into main tsdat repo
+    successes, failures, skipped = 0, 0, 0
+    logging.basicConfig(level=logging.DEBUG if verbose else logging.INFO)
 
-    ...
+    config = PipelineConfig.from_yaml(config_path)
+    pipeline = config.instantiate_pipeline()
+
+    if not isinstance(pipeline, TransformationPipeline):
+        raise ValueError(
+            f"Invalid pipeline class selected: '{pipeline.__repr_name__()}', expected"
+            " 'TransformationPipeline' subclass."
+        )
+
+    try:
+        pipeline.run(inputs=[start, end])
+        successes += 1
+    except BaseException:
+        logger.exception(
+            "Pipeline '%s' failed to process input: %s",
+            pipeline.__repr_name__(),
+            [start, end],
+        )
+        failures += 1
+    logger.info(
+        "Processing completed with %s successes, %s failures, and %s skipped.",
+        successes,
+        failures,
+        skipped,
+    )
+    return successes, failures, skipped
 
 
 if __name__ == "__main__":
