@@ -1,4 +1,8 @@
 classname: pipelines.{{ cookiecutter.module }}.pipeline.{{ cookiecutter.classname }}
+parameters:
+  datastreams:
+    - # put your input datastream(s) here
+
 
 triggers: []
 
