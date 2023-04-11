@@ -1,7 +1,9 @@
 classname: pipelines.{{ cookiecutter.module }}.pipeline.{{ cookiecutter.classname }}
 parameters:
   datastreams:
-    - # put your input datastream(s) here
+    # DEVELOPER: put your input datastream(s) here. The datastream is the folder name
+    # used in the storage area e.g.:
+    - abc.example.c1
 
 
 triggers: []

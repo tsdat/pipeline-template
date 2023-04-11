@@ -1,17 +1,35 @@
-import xarray as xr
 from pathlib import Path
-from tsdat import PipelineConfig, assert_close
+
+import xarray as xr
+from tsdat import assert_close, PipelineConfig, TransformationPipeline
+
 
 # DEVELOPER: Update paths to your configuration(s), test input(s), and expected test
 # results files.
+
 def test_{{ cookiecutter.module }}_pipeline():
+    # The transformation pipeline will likely depend on the output of an ingestion
+    # pipeline. To account for this we first run the ingest to generate input data for
+    # the vap, and then run the vap test. Please update the line below to point to the
+    #  correct folder / test name
+    from pipelines.FOLDER.test.test_pipeline import TEST_NAME
+
+    TEST_NAME()
+
     config_path = Path("pipelines/{{ cookiecutter.module }}/config/pipeline.yaml")
     config = PipelineConfig.from_yaml(config_path)
-    pipeline = config.instantiate_pipeline()
+    pipeline: TransformationPipeline = config.instantiate_pipeline()  # type: ignore
 
-    test_file = "pipelines/{{ cookiecutter.module }}/test/data/input/{{ cookiecutter.location_id }}_data.csv"
-    expected_file = "pipelines/{{ cookiecutter.module }}/test/data/expected/abc.example.a1.20220424.000000.nc"
+    # Transformation pipelines require an input of [date.time, date.time] formatted as
+    # YYYYMMDD.hhmmss. The start date is inclusive, the end date is exclusive. E.g., the
+    # default below would run the pipeline on data from midnight on 2022-04-24 to just
+    # before midnight on 2022-04-25:
+    run_dates = ["20220424.000000", "20220425.000000"]
+    dataset = pipeline.run(run_dates)
 
-    dataset = pipeline.run([test_file])
+    # You will need to create this file after running the data through the pipeline
+    # OR: Delete this and perform sanity checks on the input data instead of comparing
+    # with an expected output file
+    expected_file = "pipelines/{{ cookiecutter.module }}/test/data/expected/abc.example.c1.20220424.000000.nc"
     expected: xr.Dataset = xr.open_dataset(expected_file)  # type: ignore
     assert_close(dataset, expected, check_attrs=False)
