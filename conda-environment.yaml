@@ -1,8 +1,0 @@
-# Conda environment for developing tsdat pipelines
-
-name: tsdat-pipelines
-dependencies:
-  - python=3.8
-  - pip
-  - pip:
-      - "-r requirements-dev.txt"

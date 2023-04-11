@@ -5,3 +5,4 @@ coverage
 mypy
 black
 isort
+notebook

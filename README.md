@@ -65,7 +65,7 @@ follow the steps to copy the template repository into to your account.
 2. Run the following commands to create and activate your conda environment:
 
     ```shell
-    conda env create --file=conda-environment.yaml
+    conda env create
     conda activate tsdat-pipelines
     ```
 
