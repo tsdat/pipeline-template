@@ -13,6 +13,15 @@ logger = logging.getLogger(__name__)
 app = typer.Typer(add_completion=False)
 
 
+def pad_date_string(date: str) -> str:
+    """Given a date like YYYYMMDD[.hhmmss] returns a string like YYYYMMDD.hhmmss"""
+    if len(date) == len("YYYYMMDD"):
+        date += ".000000"
+    if len(date) != len("YYYYMMDD.hhmmss"):
+        raise typer.BadParameter(f"Date string not formatted correctly: {date}")
+    return date
+
+
 @app.command()
 def ingest(
     filepaths: List[Path] = typer.Argument(
@@ -67,8 +76,20 @@ def vap(
         dir_okay=False,
         help="The path to the vap / transform pipeline config file to use",
     ),
-    start: str = typer.Option(..., help="Start date in 'YYYYMMDD.hhmmss' format"),
-    end: str = typer.Option(..., help="End date in 'YYYYMMDD.hhmmss' format"),
+    start: str = typer.Option(
+        ...,
+        "--begin",
+        "-b",
+        help="Begin date in 'YYYYMMDD.hhmmss' format",
+        callback=pad_date_string,
+    ),
+    end: str = typer.Option(
+        ...,
+        "--end",
+        "-e",
+        help="End date in 'YYYYMMDD.hhmmss' format",
+        callback=pad_date_string,
+    ),
     verbose: bool = typer.Option(False, help="Turn logging level up to DEBUG."),
 ):
     successes, failures, skipped = 0, 0, 0
