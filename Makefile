@@ -1,2 +1,2 @@
 cookies:
-	@ python templates/generate.py ingest
+	@ python templates/generate.py

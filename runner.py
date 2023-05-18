@@ -1,6 +1,7 @@
 import logging
 from pathlib import Path
 from typing import List
+from tsdat import PipelineConfig, TransformationPipeline
 
 import typer
 
@@ -12,8 +13,17 @@ logger = logging.getLogger(__name__)
 app = typer.Typer(add_completion=False)
 
 
+def pad_date_string(date: str) -> str:
+    """Given a date like YYYYMMDD[.hhmmss] returns a string like YYYYMMDD.hhmmss"""
+    if len(date) == len("YYYYMMDD"):
+        date += ".000000"
+    if len(date) != len("YYYYMMDD.hhmmss"):
+        raise typer.BadParameter(f"Date string not formatted correctly: {date}")
+    return date
+
+
 @app.command()
-def run_pipeline(
+def ingest(
     filepaths: List[Path] = typer.Argument(
         ...,
         exists=True,
@@ -56,6 +66,61 @@ def run_pipeline(
     # Run the pipeline on the input files
     dispatcher = PipelineRegistry()
     dispatcher.dispatch(files, clump=clump, multidispatch=multidispatch)
+
+
+@app.command()
+def vap(
+    config_path: Path = typer.Argument(
+        ...,
+        exists=True,
+        dir_okay=False,
+        help="The path to the vap / transform pipeline config file to use",
+    ),
+    start: str = typer.Option(
+        ...,
+        "--begin",
+        "-b",
+        help="Begin date in 'YYYYMMDD.hhmmss' format",
+        callback=pad_date_string,
+    ),
+    end: str = typer.Option(
+        ...,
+        "--end",
+        "-e",
+        help="End date in 'YYYYMMDD.hhmmss' format",
+        callback=pad_date_string,
+    ),
+    verbose: bool = typer.Option(False, help="Turn logging level up to DEBUG."),
+):
+    successes, failures, skipped = 0, 0, 0
+    logging.basicConfig(level=logging.DEBUG if verbose else logging.INFO)
+
+    config = PipelineConfig.from_yaml(config_path)
+    pipeline = config.instantiate_pipeline()
+
+    if not isinstance(pipeline, TransformationPipeline):
+        raise ValueError(
+            f"Invalid pipeline class selected: '{pipeline.__repr_name__()}', expected"
+            " 'TransformationPipeline' subclass."
+        )
+
+    try:
+        pipeline.run(inputs=[start, end])
+        successes += 1
+    except BaseException:
+        logger.exception(
+            "Pipeline '%s' failed to process input: %s",
+            pipeline.__repr_name__(),
+            [start, end],
+        )
+        failures += 1
+    logger.info(
+        "Processing completed with %s successes, %s failures, and %s skipped.",
+        successes,
+        failures,
+        skipped,
+    )
+    return successes, failures, skipped
 
 
 if __name__ == "__main__":
