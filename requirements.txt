@@ -1,4 +1,4 @@
-tsdat >=0.6.0,<0.7.0
+tsdat >=0.7.1
 pydantic<2.0.0
 cmocean  
 act-atmos
