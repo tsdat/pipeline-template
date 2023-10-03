@@ -7,8 +7,7 @@ managers:
       - classname: tsdat.qc.handlers.FailPipeline
         parameters:
           context: Coordinate variables cannot be missing.
-    apply_to:
-      - COORDS
+    apply_to: [COORDS]
 
   - name: Fail if monotonic coordinates
     checker:
@@ -19,8 +18,7 @@ managers:
       - classname: tsdat.qc.handlers.FailPipeline
         parameters:
           context: Coordinate variables must be strictly increasing.
-    apply_to:
-      - COORDS
+    apply_to: [COORDS]
 
     #---------------------------------------------------------------
   - name: Remove missing data
@@ -31,9 +29,12 @@ managers:
       - classname: tsdat.qc.handlers.RecordQualityResults
         parameters:
           assessment: bad
-          meaning: "Value is equal to _FillValue or NaN"
-    apply_to:
-      - DATA_VARS
+          meaning: Value is equal to _FillValue or NaN
+    apply_to: [DATA_VARS]
+    exclude:
+      - altitude
+      - latitude
+      - longitude
 
   - name: Flag data below minimum valid threshold
     checker:
@@ -42,9 +43,12 @@ managers:
       - classname: tsdat.qc.handlers.RecordQualityResults
         parameters:
           assessment: bad
-          meaning: "Value is less than the valid_min."
-    apply_to:
-      - DATA_VARS
+          meaning: Value is less than the valid_min.
+    apply_to: [DATA_VARS]
+    exclude:
+      - altitude
+      - latitude
+      - longitude
 
   - name: Flag data above maximum valid threshold
     checker:
@@ -53,6 +57,9 @@ managers:
       - classname: tsdat.qc.handlers.RecordQualityResults
         parameters:
           assessment: bad
-          meaning: "Value is greater than the valid_max."
-    apply_to:
-      - DATA_VARS
+          meaning: Value is greater than the valid_max.
+    apply_to: [DATA_VARS]
+    exclude:
+      - altitude
+      - latitude
+      - longitude
