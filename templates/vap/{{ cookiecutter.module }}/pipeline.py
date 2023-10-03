@@ -30,23 +30,11 @@ class {{ cookiecutter.classname }}(TransformationPipeline):
 
         # date, time = get_start_date_and_time_str(dataset)
 
-        # plt.style.use("default")  # clear any styles that were set before
-        # plt.style.use("shared/styling.mplstyle")
-
-        # with self.storage.uploadable_dir(datastream) as tmp_dir:
-
+        # with plt.style.context("shared/styling.mplstyle"):
         #     fig, ax = plt.subplots()
         #     dataset["example_var"].plot(ax=ax, x="time")  # type: ignore
         #     fig.suptitle(f"Example Variable at {location} on {date} {time}")
-        #     plot_file = get_filename(dataset, title="example_plot", extension="png")
-        #     fig.savefig(tmp_dir / plot_file)
+        #     plot_filepath = self.get_ancillary_filepath(title="example_plot")
+        #     fig.savefig(plot_filepath)
         #     plt.close(fig)
-        # TODO: Better x-axis ticks:
-        # Set the x-axis to have ticks spaced by the hour
-        # hours = mdates.HourLocator(interval=1)
-        # ax.xaxis.set_major_locator(hours)
-
-        # # Set the format of the x-axis tick labels
-        # time_format = mdates.DateFormatter('%H:%M')
-        # ax.xaxis.set_major_formatter(time_format)
         pass
