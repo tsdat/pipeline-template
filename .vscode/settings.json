@@ -19,7 +19,7 @@
     "editor.formatOnSave": true,
     "yaml.format.printWidth": 88,
     "yaml.format.proseWrap": "always",
-    "python.formatting.provider": "black",
+    "python.formatting.provider": "none",
     "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
     "python.linting.mypyEnabled": true,
@@ -51,8 +51,6 @@
     "yaml.schemas": {
         ".vscode/schema/retriever-schema.json": "*retriever*.yaml",
         ".vscode/schema/dataset/basic-schema.json": "*dataset*.yaml",
-        ".vscode/schema/dataset/acdd-schema.json": "*dataset*.yaml",
-        ".vscode/schema/dataset/ioos-schema.json": "*dataset*.yaml",
         ".vscode/schema/quality-schema.json": "*quality*.yaml",
         ".vscode/schema/storage-schema.json": "*storage*.yaml",
         ".vscode/schema/pipeline-schema.json": "*pipeline*.yaml",

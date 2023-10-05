@@ -2,6 +2,11 @@
     "ingest_name": "Name of the Ingest",
     "ingest_location": "Location",
     "ingest_description": "Brief description of the ingest",
+    "data_standards": [
+        "basic",
+        "ACDD",
+        "IOOS"
+    ],
     "use_custom_data_reader": [
         "no",
         "yes"
