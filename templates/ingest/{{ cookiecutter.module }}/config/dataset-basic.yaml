@@ -27,3 +27,5 @@ data_vars:
     attrs:
       long_name:  Example Variable
       units: km
+      coverage_content_type: physicalMeasurement
+      comment: Example data

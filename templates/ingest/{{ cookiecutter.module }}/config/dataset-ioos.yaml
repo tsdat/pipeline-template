@@ -27,12 +27,12 @@ attrs:
   # creator_name: 
   # creator_email:
   # creator_url:
-  # creator_country:
+  # creator_country: USA
   # creator_state:
   # creator_type:
   # creator_institution:
   # creator_institution_url:
-  # creator_sector:
+  # creator_sector: other
   # contributor_name:
   # contributor_role:
   # contributor_role:
@@ -44,7 +44,7 @@ attrs:
   # publisher_name:
   # publisher_email:
   # publisher_url:
-  # publisher_country:
+  # publisher_country: USA
   # publisher_state:
   # publisher_type:
   # publisher_institution:
