@@ -3,6 +3,8 @@ import subprocess
 from pathlib import Path
 import sys
 
+from utils.schemas import generate_schema, ACDDDatasetConfig, IOOSDatasetConfig
+
 PROJECT_DIR = Path.cwd()  # cwd changes to the newly-generated project when this runs
 
 
@@ -10,14 +12,17 @@ def main():
     print("Template created for {{ cookiecutter.ingest_name }}. Checking selections...")
     
     dataset_path = str(PROJECT_DIR / "config" / "dataset")
+    schema_path = PROJECT_DIR / ".." / ".." / ".vscode" / "schema"
     if "{{ cookiecutter.data_standards }}" == "ACDD":
         os.remove(dataset_path + "-basic.yaml")
         os.remove(dataset_path + "-ioos.yaml")
         os.rename(dataset_path + "-acdd.yaml", dataset_path + ".yaml")
+        generate_schema(ACDDDatasetConfig, dir=schema_path)
     elif "{{ cookiecutter.data_standards }}" == "IOOS":
         os.remove(dataset_path + "-basic.yaml")
         os.remove(dataset_path + "-acdd.yaml")
         os.rename(dataset_path + "-ioos.yaml", dataset_path + ".yaml")
+        generate_schema(IOOSDatasetConfig, dir=schema_path)
     else:
         os.remove(dataset_path + "-acdd.yaml")
         os.remove(dataset_path + "-ioos.yaml")

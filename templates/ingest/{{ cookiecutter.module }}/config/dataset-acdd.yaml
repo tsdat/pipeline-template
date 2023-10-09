@@ -10,9 +10,10 @@ attrs:
   # temporal: 
   # institution: 
 
-  # keywords:
-  # conventions: CF-1.6, ACDD-1.3
-  # featureType: timeSeries
+  Conventions: CF-1.6, ACDD-1.3
+  keywords:
+  # keywords_vocabulary:
+  featureType: timeSeries
   # id:
   # naming_authority:
   # history:
@@ -62,8 +63,6 @@ attrs:
   # date_issued:
   # date_metadata_modified:
   # product_version:
-  # keywords:
-  # keywords_vocabulary:
   # platform:
   # platform_vocabulary: https://mmisw.org/ont/ioos/platform
   # instrument:
