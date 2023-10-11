@@ -4,7 +4,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 This repository contains a collection of one or more `tsdat` pipelines (as found under the ``pipelines`` folder).  This
-enables related pipelines to be more easily maintained and run together.  New pipelines can be added easily via 
+enables related pipelines to be more easily maintained and run together.  New pipelines can be added easily via
 the template mechanism described below.
 
 ## Repository Structure
@@ -130,6 +130,11 @@ VS Code that will make it much easier to get started quickly.)*
     - A new window pane will show up on the left of VS Code showing test status
     - Verify that all tests have passed (Green check marks)
 
+5. Set up yaml validation: run `tsdat generate-schema` from the command line
+
+    > NOTE: if you would like to validate your configuration files using one of the supported standards (i.e., ACDD or
+    IOOS), then please use the `--standards` flag and pass either `acdd` or `ioos`.
+
 ## Processing Data
 
 - The `runner.py` script can be run from the command line to process input data files:
@@ -191,18 +196,18 @@ test, and debug your pipeline.
 ## Additional resources
 
 - Learn more about `tsdat`:
-  - GitHub: https://github.com/tsdat/tsdat
-  - Documentation: https://tsdat.readthedocs.io
-  - Data standards: https://github.com/tsdat/data_standards
+  - GitHub: <https://github.com/tsdat/tsdat>
+  - Documentation: <https://tsdat.readthedocs.io>
+  - Data standards: <https://github.com/tsdat/data_standards>
 - Learn more about `xarray`:
-  - GitHub: https://github.com/pydata/xarray
-  - Documentation: https://xarray.pydata.org
+  - GitHub: <https://github.com/pydata/xarray>
+  - Documentation: <https://xarray.pydata.org>
 - Learn more about 'pydantic':
-  - GitHub: https://github.com/samuelcolvin/pydantic/
-  - Documentation: https://pydantic-docs.helpmanual.io
+  - GitHub: <https://github.com/samuelcolvin/pydantic/>
+  - Documentation: <https://pydantic-docs.helpmanual.io>
 - Other useful tools:
-  - VS Code: https://code.visualstudio.com/docs
-  - Docker: https://docs.docker.com/get-started/
-  - `pytest`: https://github.com/pytest-dev/pytest
-  - `black`: https://github.com/psf/black
-  - `matplotlib` guide: https://realpython.com/python-matplotlib-guide/
+  - VS Code: <https://code.visualstudio.com/docs>
+  - Docker: <https://docs.docker.com/get-started/>
+  - `pytest`: <https://github.com/pytest-dev/pytest>
+  - `black`: <https://github.com/psf/black>
+  - `matplotlib` guide: <https://realpython.com/python-matplotlib-guide/>
