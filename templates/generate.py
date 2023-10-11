@@ -1,9 +1,7 @@
 from __future__ import annotations
-
 import re
 from pathlib import Path
 from typing import Any, Callable, Dict, Literal
-
 import typer
 from cookiecutter.main import cookiecutter
 from slugify import slugify  # type: ignore
@@ -75,6 +73,13 @@ def ingest(
         " README file and in the metadata produced by the pipeline.",
         prompt="Briefly describe the ingest\n",
     ),
+    data_standards: str = typer.Option(
+        ...,
+        help="Data standardization conventions to hold the dataset to. Choose from "
+        "'basic'(standard CF conventions), 'ACDD' (Attribute Conventions for Data "
+        "Discovery), or 'IOOS' (Integrated Ocean Observing System) standards.",
+        prompt="Data standards to use with the ingest dataset ['basic','ACDD','IOOS']\n",
+    ),
     use_custom_data_reader: bool = typer.Option(
         False,
         help="Flag to generate boilerplate code for handling inputs stored in a data"
@@ -139,6 +144,7 @@ def ingest(
         "ingest_name": ingest_title,
         "ingest_location": ingest_location,
         "ingest_description": ingest_description,
+        "data_standards": data_standards,
         "use_custom_data_reader": _to_cookiecutter_bool(use_custom_data_reader),
         "use_custom_data_converter": _to_cookiecutter_bool(use_custom_data_converter),
         "use_custom_qc": _to_cookiecutter_bool(use_custom_qc),

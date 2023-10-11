@@ -8,6 +8,20 @@ PROJECT_DIR = Path.cwd()  # cwd changes to the newly-generated project when this
 
 def main():
     print("Template created for {{ cookiecutter.ingest_name }}. Checking selections...")
+    
+    dataset_path = str(PROJECT_DIR / "config" / "dataset")
+    if "{{ cookiecutter.data_standards }}" == "ACDD":
+        os.remove(dataset_path + "-basic.yaml")
+        os.remove(dataset_path + "-ioos.yaml")
+        os.rename(dataset_path + "-acdd.yaml", dataset_path + ".yaml")
+    elif "{{ cookiecutter.data_standards }}" == "IOOS":
+        os.remove(dataset_path + "-basic.yaml")
+        os.remove(dataset_path + "-acdd.yaml")
+        os.rename(dataset_path + "-ioos.yaml", dataset_path + ".yaml")
+    else:
+        os.remove(dataset_path + "-acdd.yaml")
+        os.remove(dataset_path + "-ioos.yaml")
+        os.rename(dataset_path + "-basic.yaml", dataset_path + ".yaml")
 
     if "{{ cookiecutter.use_custom_data_reader }}" == "no":  # type: ignore
         os.remove(PROJECT_DIR / "readers.py")

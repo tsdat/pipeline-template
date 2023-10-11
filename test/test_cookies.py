@@ -1,5 +1,4 @@
 import pytest
-
 import shutil
 from typer.testing import CliRunner
 from pathlib import Path
@@ -25,6 +24,8 @@ def test_generate_ingest_pipeline():
             "PNNL",
             "--ingest-description",
             "Testing typer wrapper over cookiecutter ingest pipeline template.",
+            "--data-standards",
+            "basic",
             "--no-use-custom-data-reader",
             "--no-use-custom-data-converter",
             "--no-use-custom-qc",

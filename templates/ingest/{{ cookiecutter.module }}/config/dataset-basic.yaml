@@ -13,9 +13,12 @@ attrs:
 coords:
   time:
     dims: [time]
-    dtype: datetime64[s]
+    dtype: datetime64[ns]
     attrs:
-      units: Seconds since 1970-01-01 00:00:00
+      long_name: Time 
+      standard_name: time
+      units: Seconds since 1970-01-01 00:00:00 UTC 
+      timezone: UTC
 
 data_vars:
   example_var:
@@ -24,3 +27,4 @@ data_vars:
     attrs:
       long_name:  Example Variable
       units: km
+      comment: Example data
