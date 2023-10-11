@@ -449,14 +449,14 @@
                 },
                 "temporal": {
                     "title": "Temporal",
-                    "description": "An optional string which describes the temporal resolution of the data (if it spaced in regular intervals). This string should be formated as a number followed by a unit of measurement, e.g., '10m' would indicate the data is sampled every ten minutes. Only lowercase alphanumeric characters are allowed.",
+                    "description": "An optional string which describes the temporal resolution of the data (if it spaced in regular intervals). This string should be formatted as a number followed by a unit of measurement, e.g., '10m' would indicate the data is sampled every ten minutes. Only lowercase alphanumeric characters are allowed.",
                     "minLength": 2,
                     "pattern": "^[0-9]+[a-zA-Z]+$",
                     "type": "string"
                 },
                 "data_level": {
                     "title": "Data Level",
-                    "description": "A string used to indicate the level of processing of the output data. It should be formated as a letter followed by a number. Typical values for this include: a1 - data is ingested (no qc), b1 - data is ingested and quality checks applied, c1 (or higher) - one or more a* or b* datastreams used to create a higher-level data product. Only lowercase alphanumeric characters are allowed.",
+                    "description": "A string used to indicate the level of processing of the output data. It should be formatted as a letter followed by a number. Typical values for this include: a1 - data is ingested (no qc), b1 - data is ingested and quality checks applied, c1 (or higher) - one or more a* or b* datastreams used to create a higher-level data product. Only lowercase alphanumeric characters are allowed.",
                     "maxLength": 3,
                     "minLength": 2,
                     "pattern": "^[a-z0-9]+$",

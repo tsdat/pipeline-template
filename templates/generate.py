@@ -6,8 +6,6 @@ import typer
 from cookiecutter.main import cookiecutter
 from slugify import slugify  # type: ignore
 
-from utils import generate_schema, ACDDDatasetConfig, IOOSDatasetConfig
-
 app = typer.Typer()
 
 
@@ -169,12 +167,6 @@ def ingest(
 
     output_dir = Path("pipelines") / module
     typer.echo(f"Created new ingest pipeline in {output_dir.as_posix()}")
-    
-    schema_path = Path(".vscode/schema")
-    if data_standards=='ACDD':
-        generate_schema(ACDDDatasetConfig, dir=schema_path)
-    elif data_standards=='IOOS':
-        generate_schema(IOOSDatasetConfig, dir=schema_path)
 
 
 @app.command()

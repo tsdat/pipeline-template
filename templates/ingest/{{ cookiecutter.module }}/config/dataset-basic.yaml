@@ -13,7 +13,7 @@ attrs:
 coords:
   time:
     dims: [time]
-    dtype: datetime64[ms]
+    dtype: datetime64[ns]
     attrs:
       long_name: Time 
       standard_name: time
@@ -27,5 +27,4 @@ data_vars:
     attrs:
       long_name:  Example Variable
       units: km
-      coverage_content_type: physicalMeasurement
       comment: Example data

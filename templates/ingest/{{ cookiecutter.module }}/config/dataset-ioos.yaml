@@ -85,7 +85,7 @@ attrs:
 coords:
   time:
     dims: [time]
-    dtype: datetime64[ms]
+    dtype: datetime64[ns]
     attrs:
       long_name: Time 
       standard_name: time

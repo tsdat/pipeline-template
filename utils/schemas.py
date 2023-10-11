@@ -1,4 +1,5 @@
 from pathlib import Path
+from enum import Enum
 from pydantic import Extra, Field, HttpUrl
 from tsdat import (
     DatasetConfig,
@@ -8,6 +9,9 @@ from tsdat import (
     StorageConfig,
 )
 from tsdat.config.attributes import GlobalAttributes
+import typer
+
+app = typer.Typer()
 
 
 class ACDDGlobalAttrs(GlobalAttributes, extra=Extra.allow):
@@ -15,7 +19,8 @@ class ACDDGlobalAttrs(GlobalAttributes, extra=Extra.allow):
         description=(
             "A user-friendly description of the dataset. It should provide"
             " enough context about the data for new users to quickly understand how the"
-            " data can be used."),
+            " data can be used."
+        ),
         default=None,
     )
     summary: str = Field(
@@ -38,7 +43,7 @@ class ACDDGlobalAttrs(GlobalAttributes, extra=Extra.allow):
         description="The method of production of the original data. If it was model-generated, source should name the model and its version. If it is observational, source should characterize it. Examples: 'temperature from CTD #1234'; 'world model v.0.1'.",
         default=None,
     )
-    processing_level: str = Field(     
+    processing_level: str = Field(
         description="A textual description of the processing (or quality control) level of the data.",
         default=None,
     )
@@ -244,7 +249,6 @@ class ACDDGlobalAttrs(GlobalAttributes, extra=Extra.allow):
         default=None,
     )
     platform: str = Field(
-
         description="Name of the platform(s) that supported the sensor data used to create this data set or product. Platforms can be of any type, including satellite, ship, station, aircraft or other. Indicate controlled vocabulary used in platform_vocabulary.",
         default=None,
     )
@@ -369,7 +373,7 @@ class IOOSGlobalAttrs(ACDDGlobalAttrs, extra=Extra.allow):
         description="The WMO identifier for the platform used to measure the data. This identifier can be any of the following types: 1. WMO ID for buoys (numeric, 5 digits), 2. WMO ID for gliders (numeric, 7 digits), 3. NWS ID (alphanumeric, 5 digits). When a dataset is assigned a wmo_platform_code it is thereby assigned a secondary Asset Identifier for the 'WMO' naming_authority. See https://ioos.github.io/ioos-metadata/ioos-metadata-profile-v1-2.html#rules-for-ioos-asset-identifier-generation for more details.",
         default=None,
     )
-    
+
 
 class ACDDDatasetConfig(DatasetConfig, extra=Extra.allow):
     attrs: ACDDGlobalAttrs = Field(
@@ -377,16 +381,34 @@ class ACDDDatasetConfig(DatasetConfig, extra=Extra.allow):
         description="Attributes that pertain to the dataset as a whole (as opposed to"
         " attributes that are specific to individual variables.",
     )
-    
+
+
 class IOOSDatasetConfig(DatasetConfig, extra=Extra.allow):
     attrs: IOOSGlobalAttrs = Field(
-        
         description="Attributes that pertain to the dataset as a whole (as opposed to"
         " attributes that are specific to individual variables.",
     )
 
 
-def generate_schema(dataset_config: DatasetConfig, dir: Path = Path(".vscode/schema/")):
+class StandardsType(str, Enum):
+    basic = "basic"
+    acdd = "acdd"
+    ioos = "ioos"
+
+
+@app.command()
+def generate_schema(
+    dir: Path = typer.Option(Path(".vscode/schema/"), file_okay=False, dir_okay=True),
+    standards: StandardsType = typer.Option(StandardsType.basic),
+):
+    # def generate_schema(dataset_config: DatasetConfig, dir: Path = Path(".vscode/schema/")):
+    if standards == "acdd":
+        dataset_config = ACDDDatasetConfig
+    elif standards == "ioos":
+        dataset_config = IOOSDatasetConfig
+    else:
+        dataset_config = DatasetConfig
+
     dir.mkdir(exist_ok=True)
     cls_mapping = {
         "retriever": RetrieverConfig,
@@ -402,5 +424,5 @@ def generate_schema(dataset_config: DatasetConfig, dir: Path = Path(".vscode/sch
     print("Done!")
 
 
-# if __name__ == "__main__":
-#     generate_schema(IOOSDatasetConfig)
+if __name__ == "__main__":
+    app()
