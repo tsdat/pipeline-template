@@ -19,15 +19,6 @@
     "editor.formatOnSave": true,
     "yaml.format.printWidth": 88,
     "yaml.format.proseWrap": "always",
-    "python.formatting.provider": "none",
-    "python.linting.enabled": true,
-    "python.linting.lintOnSave": true,
-    "python.linting.mypyEnabled": true,
-    "python.linting.flake8Enabled": false,
-    "python.linting.flake8Args": [
-        "--exclude",
-        "templates/**"
-    ],
     // 
     // Settings for helpful utilities
     // 
