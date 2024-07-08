@@ -1,3 +1,3 @@
-tsdat>=0.7.4
+tsdat[aws]>=0.8.3
 cmocean
 typer
