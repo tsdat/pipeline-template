@@ -1,3 +1,4 @@
+numpy<2.0.0
 tsdat[aws]>=0.8.3
 cmocean
 typer
