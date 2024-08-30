@@ -3,9 +3,10 @@
 [![tests](https://github.com/tsdat/pipeline-template/actions/workflows/tests.yml/badge.svg)](https://github.com/tsdat/pipeline-template/actions/workflows/tests.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-This repository contains a collection of one or more `tsdat` pipelines (as found under the ``pipelines`` folder).  This
-enables related pipelines to be more easily maintained and run together.  New pipelines can be added easily via
-the template mechanism described below.
+This repository contains a collection of one or more `tsdat` pipelines 
+(as found under the ``pipelines`` folder).  This enables related pipelines 
+to be more easily maintained and run together.  New pipelines can be added 
+easily via the template mechanism described below.
 
 ## Repository Structure
 
@@ -29,23 +30,26 @@ The following are required to develop a `tsdat` pipeline:
 
 1. **A GitHub account.** [Click here to create an account if you don't have one already](https://github.com/)
 
-2. **An Anaconda environment.**  We strongly recommend developing in an Anaconda Python environment to ensure
-that there are no library dependency issues.  [Click here for more information on installing Anaconda on your computer](https://docs.anaconda.com/anaconda/install/index.html)
+2. **An Anaconda environment.**  We strongly recommend developing in an Anaconda Python 
+environment to ensure that there are no library dependency issues.  
+[Click here for more information on installing Anaconda on your computer](https://docs.anaconda.com/anaconda/install/index.html)
 
-    > **Windows Users** - You can install Anaconda directly to your Windows box OR you can run via a linux
-    environment using the Windows Subsystem for Linux (WSL).  See
-    [this tutorial on WSL](https://tsdat.readthedocs.io/en/latest/tutorials/setup_wsl.html) for
-    how to set up a WSL environment and attach VS Code to it.
+    > **Windows Users** - You can install Anaconda directly to your Windows 
+    box OR you can run via a linux environment using the Windows Subsystem 
+    for Linux (WSL).  See
+    [this tutorial on WSL](https://tsdat.readthedocs.io/en/latest/tutorials/setup_wsl.html) 
+    for how to set up a WSL environment and attach VS Code to it.
 
 ## Creating a repository from the pipeline-template
 
-You can create a new repository based upon the `tsdat` pipeline-template repository in GitHub:
+You can create a new repository based upon the `tsdat` pipeline-template repository 
+in GitHub:
 
-1. Click this '[Use this template](https://github.com/tsdat/pipeline-template/generate)' link and
-follow the steps to copy the template repository into to your account.
-    > **NOTE:** If you are looking to get an older version of the template, you will need to
-    select the box next to 'Include all branches' and set the branch your are interested
-    in as your new default branch.
+1. Click this '[Use this template](https://github.com/tsdat/pipeline-template/generate)' 
+link and follow the steps to copy the template repository into to your account.
+    > **NOTE:** If you are looking to get an older version of the template, you 
+    will need to select the box next to 'Include all branches' and set the branch 
+    your are interested in as your new default branch.
 
 2. On github click the 'Code' button to get a link to your code, then run
 
@@ -120,7 +124,8 @@ VS Code that will make it much easier to get started quickly.)*
 3. Tell VS Code to use your new conda environment:
     - Press `F1` to bring up the command pane in VS Code
     - Type `Python: Select Interpreter` and select it.
-    - Select the newly-created `tsdat-pipelines` conda environment from the drop-down list. You may need to refresh the list (cycle icon in the top right) to see it.
+    - Select the newly-created `tsdat-pipelines` conda environment from the drop-down list. 
+    You may need to refresh the list (cycle icon in the top right) to see it.
     - Bring up the command pane and type `Developer: Reload Window` to reload VS Code
     and ensure the settings changes propagate correctly.
 
@@ -132,24 +137,32 @@ VS Code that will make it much easier to get started quickly.)*
 
 5. Set up yaml validation: run `tsdat generate-schema` from the command line
 
-    > NOTE: if you would like to validate your configuration files using one of the supported standards (i.e., ACDD or
-    IOOS), then please use the `--standards` flag and pass either `acdd` or `ioos`.
+    > NOTE: if you would like to validate your configuration files using 
+    one of the supported standards (i.e., Attribute Conventions for Data
+    Discovery (ACDD) or the Ingrated Ocean Observing System (IOOS), then 
+    please use the `--standards` flag and pass either `acdd` or `ioos`.
+
+    > I.e. `tsdat generate-schema --standards ioos`
 
 ## Processing Data
 
-- The `runner.py` script can be run from the command line to process input data files:
+The `runner.py` script is used to run both ingest and VAP pipelines from the command line to 
+process datafiles.
 
-    ```shell
-    python runner.py <path(s) to file(s) to process>
+### Ingest Pipelines
 
+- The lowest level pipelines that read in raw data are our ingest pipelines.
+They are run via the following command:
     ```shell
+    python runner.py ingest <path(s) to file(s) to process>
+    ```
     > The pipeline(s) used to process the data will depend on the specific patterns declared
     by the `pipeline.yaml` files in each pipeline module in this repository.
 
 - You can run the example pipeline that comes bundled with this repository by running:
 
     ```shell
-    python runner.py pipelines/example_pipeline/test/data/input/buoy.z06.00.20201201.000000.waves.csv
+    python runner.py ingset pipelines/example_pipeline/test/data/input/buoy.z06.00.20201201.000000.waves.csv
     ```
 
     If goes successfully it should output some text, ending with the line:
@@ -162,13 +175,30 @@ VS Code that will make it much easier to get started quickly.)*
 to process all 'csv' files in some input folder `data/to/process/` you would run:
 
     ```shell
-    python runner.py data/to/process/*.csv
+    python runner.py ingest data/to/process/*.csv
     ```
 
 - The `--help` option can be used to show additional usage information:
 
     ```shell
-    python runner.py --help
+    python runner.py ingest --help
+    ```
+
+### VAP Pipelines
+
+- Value Added Product (VAP) Pipelines operate on the output of ingest pipelines. 
+
+- The command to run these pipelines has a slightly different structure, where we enter the 
+pipeline.yaml configuration file to use, as well as a start and end date:
+
+    ```shell
+    python runner.py vap <pipeline/<pipeline-name>/config/pipeline.yaml> --begin yyyymmdd.HHMMSS --end yyyymmdd.HHMMSS
+    ```
+
+- The --help option can also be used here if you get stuck:
+
+    ```shell
+    python runner.py vap --help
     ```
 
 ## Adding a new pipeline
@@ -192,6 +222,72 @@ repository folder run:
 test, and debug your pipeline.
 
 > This repository supports adding as many pipelines as you want - just repeat the steps above.
+
+## Debugging Pipelines
+
+The easiest way to develop and debug pipelines is using VSCode's built-in "Run and Debug" tool, 
+accessed on the left-hand toolbar or ctrl-shift-d.
+
+1. To set up a debug launcher, open the launch.json file located in the .vscode folder.
+
+2. To add a debug script for an ingest pipeline, add and update:
+    ```json
+    {
+        "name": "Debug Ingest",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}//runner.py",
+        "justMyCode": false,
+        "console": "integratedTerminal",
+        "args": [
+            "ingest",
+            "<path/to/datafile.ext>",
+        ]
+    },
+    ```
+
+    And for a VAP:
+
+    ```json
+    {
+        "name": "Debug VAP",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}//runner.py",
+        "justMyCode": false,
+        "console": "integratedTerminal",
+        "args": [
+            "vap",
+            "pipelines/<pipeline_name>/config/pipeline.yaml",
+            "--begin",
+            "yyyymmdd.HHMMSS",
+            "--end",
+            "yyyymmdd.HHMMSS"
+        ]
+    },
+    ```
+
+3. Add breakpoint(s) where you want them, and now when you use VSCode's debugging tool, 
+select the ingest or VAP pipeline launch configuration from the drop-down and hit the 
+green arrow to start.
+
+> Note that sometimes the debugger doesn't activate the appropriate conda environment, 
+so you may have to cancel the debugger run, do so manually, then restart it again.
+
+## Tutorials
+
+Tutorial walkthroughs can be found on the Tsdat documentation online. It is recommended to 
+start with the 
+[ingest pipeline tutorial](https://tsdat.readthedocs.io/en/stable/tutorials/data_ingest/) 
+and work through the rest of them on the website.
+
+### List of tutorials:
+- Ingest Pipeline: <https://tsdat.readthedocs.io/en/stable/tutorials/data_ingest/>
+- Customizing Pipelines: <https://tsdat.readthedocs.io/en/stable/tutorials/pipeline_customization/>
+- VAP Pipelines: <https://tsdat.readthedocs.io/en/stable/tutorials/vap_pipelines/>
+
+- Using WSL in VSCode on Windows: <https://tsdat.readthedocs.io/en/stable/tutorials/setup_wsl/>
+- Deploying Cloud Pipelines: <https://tsdat.readthedocs.io/en/stable/tutorials/aws_template/>
 
 ## Additional resources
 

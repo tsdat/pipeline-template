@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "Python: Current File",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${file}",
             "justMyCode": false,
@@ -14,7 +14,7 @@
         },
         {
             "name": "Debug Tests",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "purpose": [
                 "debug-test"
@@ -22,6 +22,34 @@
             "program": "${file}",
             "justMyCode": false,
             "console": "integratedTerminal",
-        }
+        },
+        {
+            "name": "Debug Ingest",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}//runner.py",
+            "justMyCode": false,
+            "console": "integratedTerminal",
+            "args": [
+                "ingest",
+                "<path/to/datafile.ext>",
+            ]
+        },
+        {
+            "name": "Debug VAP",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}//runner.py",
+            "justMyCode": false,
+            "console": "integratedTerminal",
+            "args": [
+                "vap",
+                "pipelines/<pipeline_name>/config/pipeline.yaml",
+                "--begin",
+                "yyyymmdd.HHMMSS",
+                "--end",
+                "yyyymmdd.HHMMSS"
+            ]
+        },
     ]
 }
