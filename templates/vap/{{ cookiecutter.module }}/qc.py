@@ -30,11 +30,11 @@ class CustomQualityChecker(QualityChecker):
     """Extra parameters that can be set via the quality configuration file. If you opt
     to not use any configuration parameters then please remove the code above."""
 
-    def run(self, dataset: xr.Dataset, variable_name: str) -> NDArray[np.bool8]:
+    def run(self, dataset: xr.Dataset, variable_name: str) -> NDArray[np.bool_]:
 
         # True values in the failures array indicate a quality problem.
         var_data = dataset[variable_name]
-        failures: NDArray[np.bool8] = np.zeros_like(var_data, dtype=np.bool8)  # type: ignore
+        failures: NDArray[np.bool_] = np.zeros_like(var_data, dtype=np.bool_)  # type: ignore
         raise NotImplementedError
         return failures
 
@@ -66,7 +66,7 @@ class CustomQualityHandler(QualityHandler):
     to not use any configuration parameters then please remove the code above."""
 
     def run(
-        self, dataset: xr.Dataset, variable_name: str, failures: NDArray[np.bool8]
+        self, dataset: xr.Dataset, variable_name: str, failures: NDArray[np.bool_]
     ) -> xr.Dataset:
         raise NotImplementedError
         return dataset
