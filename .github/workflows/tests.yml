@@ -2,13 +2,29 @@ name: tests
 on: [pull_request, push, workflow_dispatch]
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    name: Run Test Suite
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -el {0}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["ubuntu-latest", "macos-13"]
+        python-version: ["3.10"]
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: "3.10"
-      - run: pip install -r requirements-dev.txt
+          python-version: ${{ matrix.python-version }}
+          channels: arm-doe,conda-forge
+          activate-environment: tsdat-pipelines
+      - run: |
+          conda activate tsdat-pipelines
+          conda install -n base conda-libmamba-solver
+          conda config --set solver libmamba
+          conda env update --name tsdat-pipelines --file environment.yml
       - run: coverage run -m pytest
       - run: coverage xml --omit "templates/ingest/*","pipelines/ingest_testing/*"
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v4
