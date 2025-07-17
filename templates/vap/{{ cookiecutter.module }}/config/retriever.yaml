@@ -16,7 +16,7 @@ parameters:
 
 coords:
   time:
-    name: N/A
+    name: time
     data_converters:
       - classname: tsdat.transform.CreateTimeGrid
         interval: 5min
