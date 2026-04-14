@@ -21,5 +21,9 @@
     ],
     "module": "{{ cookiecutter.ingest_name | slugify(separator='_') }}",
     "classname": "{{ cookiecutter.module | replace('_', ' ') | title | replace(' ', '') }}",
-    "location_id": "{{ cookiecutter.ingest_location | slugify(separator='_') }}"
+    "location_id": "{{ cookiecutter.ingest_location | slugify(separator='_') }}",
+    "_copy_without_render": [
+        "*.nc",
+        "**/*.nc"
+    ]
 }
