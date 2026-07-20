@@ -162,7 +162,7 @@ They are run via the following command:
 - You can run the example pipeline that comes bundled with this repository by running:
 
     ```shell
-    python runner.py ingset pipelines/example_pipeline/test/data/input/buoy.z06.00.20201201.000000.waves.csv
+    python runner.py ingest pipelines/example_pipeline/test/data/input/buoy.z06.00.20201201.000000.waves.csv
     ```
 
     If goes successfully it should output some text, ending with the line:
