@@ -27,7 +27,7 @@ the template prompt.
 ```bash
 cd $REPOSITORY_ROOT
 conda activate tsdat-pipelines # <-- you only need to do this the first time you start a terminal shell
-python runner.py pipelines/{ingest-name}/test/data/input/{location}_data.csv
+python runner.py ingest pipelines/{ingest-name}/test/data/input/{location}_data.csv
 ```
 
 ## Test data
