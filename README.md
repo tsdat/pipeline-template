@@ -299,7 +299,7 @@ and work through the rest of them on the website.
   - GitHub: <https://github.com/pydata/xarray>
   - Documentation: <https://xarray.pydata.org>
 - Learn more about 'pydantic':
-  - GitHub: <https://github.com/samuelcolvin/pydantic/>
+  - GitHub: <https://github.com/pydantic/pydantic/>
   - Documentation: <https://pydantic-docs.helpmanual.io>
 - Other useful tools:
   - VS Code: <https://code.visualstudio.com/docs>

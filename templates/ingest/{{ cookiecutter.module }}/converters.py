@@ -8,7 +8,7 @@ dataset.yaml definition.
 import xarray as xr
 from typing import Any, Optional
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel, ConfigDict
 from tsdat import DataConverter, DatasetConfig, RetrievedDataset
 
 
@@ -25,7 +25,8 @@ class CustomDataConverter(DataConverter):
 
     ---------------------------------------------------------------------------------"""
 
-    class Parameters(BaseModel, extra=Extra.forbid):
+    class Parameters(BaseModel):
+        model_config = ConfigDict(extra="forbid")
         """If your CustomConverter should take any additional arguments from the
         retriever configuration file, then those should be specified here.
 
