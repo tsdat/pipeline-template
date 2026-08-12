@@ -24,6 +24,7 @@ jobs:
           conda activate tsdat-pipelines
           conda install -n base conda-libmamba-solver
           conda config --set solver libmamba
+          sed -i.bak "s/python>=3.10,<3.14/python=${{ matrix.python-version }}/" environment.yml
           conda env update --name tsdat-pipelines --file environment.yml
       - run: coverage run -m pytest
       - run:
