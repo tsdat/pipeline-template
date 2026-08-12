@@ -1,3 +1,2 @@
 tsdat[aws]>=0.10.0
-typer
 cmocean
