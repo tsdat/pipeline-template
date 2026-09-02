@@ -1,6 +1,4 @@
 from pathlib import Path
-
-import pytest
 import xarray as xr
 from tsdat import assert_close, PipelineConfig, TransformationPipeline
 
@@ -11,7 +9,6 @@ from tsdat import assert_close, PipelineConfig, TransformationPipeline
 # in order to declare this dependency so the tests can run in the correct order (e.g.,
 # for github actions CI/CD), update the line below to point to the correct folder and
 # test name
-@pytest.mark.dependency(depends=["../../example_pipeline/test/test_pipeline.py"])
 def test_{{ cookiecutter.module }}_pipeline():
     # The transformation pipeline will likely depend on the output of an ingestion
     # pipeline. To account for this we first run the ingest to generate input data for
